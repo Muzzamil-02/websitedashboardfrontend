@@ -87,21 +87,21 @@ const Sidebar = () => {
     {
       id: 21,
       text: "Contact Us",
-      path: "/settings",
+      path: "/contactus",
       selected: true,
     },
     {
       id: 22,
       text: "Term",
 
-      path: "/settings",
+      path: "/term",
       selected: true,
     },
     {
       id: 23,
       text: "Policy",
 
-      path: "settings",
+      path: "policy",
       selected: true,
     },
   ];
