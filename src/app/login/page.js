@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import {
   TextField,
@@ -12,6 +11,7 @@ import {
   Box,
   Link,
 } from "@mui/material";
+import { AuthHelper } from "@/lib/helpers/auth/helper";
 
 const page = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -19,21 +19,6 @@ const page = () => {
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: credentials.email,
-      password: credentials.password,
-    });
-
-    if (!result.error) {
-      router.push("/dashboard");
-    } else {
-      alert("Login failed!");
-    }
   };
 
   return (
@@ -53,7 +38,13 @@ const page = () => {
         <Typography variant="body1" gutterBottom color="textSecondary">
           Login to your account
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            AuthHelper.login(credentials.email, credentials.password, router);
+          }}
+        >
           <TextField
             fullWidth
             label="Email"

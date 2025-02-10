@@ -11,6 +11,7 @@ import {
   Box,
   Link,
 } from "@mui/material";
+import { AuthHelper } from "@/lib/helpers/auth/helper";
 
 const page = () => {
   const [user, setUser] = useState({
@@ -30,9 +31,7 @@ const page = () => {
       alert("Passwords do not match");
       return;
     }
-
-    console.log("User Registered:", user); // Replace with API call
-    router.push("/login");
+    await AuthHelper.signup(user.email, user.password, router);
   };
 
   return (
