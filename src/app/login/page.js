@@ -41,7 +41,6 @@ const page = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-
             AuthHelper.login(credentials.email, credentials.password, router);
           }}
         >
