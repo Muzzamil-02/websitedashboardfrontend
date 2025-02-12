@@ -6,7 +6,6 @@ import {
   Container,
   Paper,
   Button,
-  Typography,
   Box,
   Tabs,
   Tab,

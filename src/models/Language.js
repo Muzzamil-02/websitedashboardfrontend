@@ -15,7 +15,7 @@ const languageSchema = new mongoose.Schema(
     pages: [pageSchema],
     active: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   { timestamps: true }
