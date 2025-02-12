@@ -9,12 +9,7 @@ import {
   Drawer,
   Collapse,
 } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import HistoryIcon from "@mui/icons-material/History";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LogoutIcon from "@mui/icons-material/Logout";
-import BusinessIcon from "@mui/icons-material/Business";
+
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import WorkIcon from "@mui/icons-material/Work";
@@ -82,23 +77,28 @@ const Sidebar = () => {
           text: "Research & Publications",
           path: "/resources/research-publication",
         },
+        {
+          id: 21,
+          text: "Detail Insights",
+          path: "/resources/insights-detail",
+        },
       ],
     },
     {
-      id: 21,
+      id: 22,
       text: "Contact Us",
       path: "/contactus",
       selected: true,
     },
     {
-      id: 22,
+      id: 23,
       text: "Term",
 
       path: "/term",
       selected: true,
     },
     {
-      id: 23,
+      id: 24,
       text: "Policy",
 
       path: "policy",
