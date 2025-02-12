@@ -111,3 +111,38 @@ export async function PUT(request, { params }) {
     );
   }
 }
+export async function GET(request, { params }) {
+  await dbConnect();
+  const { lang, page } = await params;
+  const securityHeaders = {
+    "Content-Type": "application/json",
+  };
+  try {
+    const doc = await Language.findOne({
+      code: lang,
+      "pages.slug": page,
+    }).select("pages.$");
+    console.log("Pages: ", doc);
+
+    return new Response(
+      JSON.stringify({
+        data: doc?.pages?.[0]?.sections,
+      }),
+      {
+        status: 200,
+        headers: securityHeaders,
+      }
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        error: "Server Side error",
+        details: process.env.NODE_ENV === "development" ? error.message : null,
+      }),
+      {
+        status: 500,
+        headers: securityHeaders,
+      }
+    );
+  }
+}
