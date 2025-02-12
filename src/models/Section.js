@@ -4,7 +4,7 @@ export const sectionSchema = new mongoose.Schema({
   slug: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
     match: [/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Invalid slug format"],
   },
   attributes: {
@@ -14,6 +14,6 @@ export const sectionSchema = new mongoose.Schema({
   },
   lastModified: {
     type: Date,
-    default: Date.now, // Tracks content changes
+    default: Date.now,
   },
 });

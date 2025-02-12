@@ -21,8 +21,9 @@ const languageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Compound index for faster nested queries
-languageSchema.index({ code: 1, "pages.slug": 1, "pages.sections.slug": 1 });
-
+languageSchema.index(
+  { code: 1, "pages.slug": 1, "pages.sections.slug": 1 },
+  { unique: false }
+);
 export default mongoose.models.Language ||
   mongoose.model("Language", languageSchema);

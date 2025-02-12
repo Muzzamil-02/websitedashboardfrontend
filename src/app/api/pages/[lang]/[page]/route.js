@@ -37,14 +37,12 @@ export async function PUT(request, { params }) {
           },
           update: exists
             ? {
-                // Update existing section
                 $set: {
                   "pages.$[page].sections.$[section]": section,
                   "pages.$[page].lastModified": new Date(),
                 },
               }
             : {
-                // Add new section
                 $push: {
                   "pages.$[page].sections": section,
                 },
@@ -100,10 +98,10 @@ export async function PUT(request, { params }) {
       }
     );
   } catch (error) {
-    console.error("PUT Error:", error);
+    console.error("PUT Call Error:", error);
     return new Response(
       JSON.stringify({
-        error: "Server error",
+        error: "Server Side error",
         details: process.env.NODE_ENV === "development" ? error.message : null,
       }),
       {
