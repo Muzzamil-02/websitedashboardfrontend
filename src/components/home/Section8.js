@@ -85,12 +85,6 @@ const Section8 = ({ formData, onFieldChange }) => {
                 variant="outlined"
                 sx={{ marginTop: 1 }}
               />
-
-              <Box sx={{ textAlign: "center", marginTop: 2 }}>
-                <Button variant="contained" color="primary">
-                  {formData[key].buttonText}
-                </Button>
-              </Box>
             </Paper>
           </Grid>
         ))}
