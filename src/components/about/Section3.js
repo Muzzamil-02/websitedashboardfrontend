@@ -15,9 +15,7 @@ const Section3 = ({ formData, onFieldChange }) => {
             label="Highlighted Text"
             name="highlightedText"
             value={formData.highlightedText}
-            onChange={(e) =>
-              onFieldChange("section3", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -27,9 +25,7 @@ const Section3 = ({ formData, onFieldChange }) => {
             label="Heading"
             name="heading"
             value={formData.heading}
-            onChange={(e) =>
-              onFieldChange("section3", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -39,9 +35,7 @@ const Section3 = ({ formData, onFieldChange }) => {
             label="Description"
             name="description"
             value={formData.description}
-            onChange={(e) =>
-              onFieldChange("section3", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>

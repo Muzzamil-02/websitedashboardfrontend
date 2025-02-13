@@ -16,13 +16,7 @@ const Section4 = ({ formData, onFieldChange }) => {
               label="Value"
               name={`component[${index}].value`}
               value={item.value}
-              onChange={(e) =>
-                onFieldChange(
-                  "section4",
-                  `component[${index}].value`,
-                  e.target.value
-                )
-              }
+              onChange={(e) => onFieldChange(e.target.name, e.target.value)}
               variant="outlined"
             />
           </Grid>
@@ -32,13 +26,7 @@ const Section4 = ({ formData, onFieldChange }) => {
               label="Label"
               name={`component[${index}].label`}
               value={item.label}
-              onChange={(e) =>
-                onFieldChange(
-                  "section4",
-                  `component[${index}].label`,
-                  e.target.value
-                )
-              }
+              onChange={(e) => onFieldChange(e.target.name, e.target.value)}
               variant="outlined"
             />
           </Grid>

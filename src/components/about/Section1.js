@@ -13,11 +13,9 @@ const Section1 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="Heading"
-            name="heading"
-            value={formData.heading}
-            onChange={(e) =>
-              onFieldChange("section1", e.target.name, e.target.value)
-            }
+            name="Heading"
+            value={formData.Heading}
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -27,9 +25,7 @@ const Section1 = ({ formData, onFieldChange }) => {
             label="Description"
             name="description"
             value={formData.description}
-            onChange={(e) =>
-              onFieldChange("section1", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
