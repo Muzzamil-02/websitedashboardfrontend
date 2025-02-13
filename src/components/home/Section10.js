@@ -8,7 +8,7 @@ const Section10 = ({ formData, onFieldChange }) => {
     <Box sx={{ marginTop: 4 }}>
       {/* Main Heading */}
       <Typography variant="h5" gutterBottom>
-        {formData.mainHeading || "Advisory"}
+        section10
       </Typography>
 
       {/* Main Heading Input */}
@@ -17,9 +17,7 @@ const Section10 = ({ formData, onFieldChange }) => {
         label="Main Heading"
         name="mainHeading"
         value={formData.mainHeading}
-        onChange={(e) =>
-          onFieldChange("section10", e.target.name, e.target.value)
-        }
+        onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
@@ -30,23 +28,10 @@ const Section10 = ({ formData, onFieldChange }) => {
         label="Heading (HTML)"
         name="heading"
         value={formData.heading}
-        onChange={(e) =>
-          onFieldChange("section10", e.target.name, e.target.value)
-        }
+        onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 1 }}
       />
-      <Box
-        sx={{
-          backgroundColor: "#f5f5f5",
-          padding: 2,
-          borderRadius: 2,
-          marginBottom: 3,
-        }}
-      >
-        <Typography variant="body2">Preview:</Typography>
-        {parse(formData.heading)}
-      </Box>
 
       {/* Subheading Input */}
       <TextField
@@ -56,15 +41,10 @@ const Section10 = ({ formData, onFieldChange }) => {
         label="Subheading"
         name="subHeading"
         value={formData.subHeading}
-        onChange={(e) =>
-          onFieldChange("section10", e.target.name, e.target.value)
-        }
+        onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 3 }}
       />
-
-      {/* Advisory Components Section */}
-      <Typography variant="h6">Advisory Components</Typography>
 
       <Grid container spacing={2}>
         {formData.component.map((item, index) => (
@@ -76,11 +56,7 @@ const Section10 = ({ formData, onFieldChange }) => {
                 label="Title"
                 name={`component.${index}.title`}
                 value={item.title}
-                onChange={(e) => {
-                  const updatedComponents = [...formData.component];
-                  updatedComponents[index].title = e.target.value;
-                  onFieldChange("section10", "component", updatedComponents);
-                }}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginBottom: 1 }}
               />
@@ -93,11 +69,7 @@ const Section10 = ({ formData, onFieldChange }) => {
                 label="Description"
                 name={`component.${index}.description`}
                 value={item.description}
-                onChange={(e) => {
-                  const updatedComponents = [...formData.component];
-                  updatedComponents[index].description = e.target.value;
-                  onFieldChange("section10", "component", updatedComponents);
-                }}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginBottom: 1 }}
               />
@@ -108,11 +80,7 @@ const Section10 = ({ formData, onFieldChange }) => {
                 label="Image URL"
                 name={`component.${index}.imageURL`}
                 value={item.imageURL}
-                onChange={(e) => {
-                  const updatedComponents = [...formData.component];
-                  updatedComponents[index].imageURL = e.target.value;
-                  onFieldChange("section10", "component", updatedComponents);
-                }}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginBottom: 1 }}
               />

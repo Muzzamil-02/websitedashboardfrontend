@@ -21,13 +21,7 @@ const Section8 = ({ formData, onFieldChange }) => {
                 label="Main Heading"
                 name={`${key}.mainHeading`}
                 value={formData[key].mainHeading}
-                onChange={(e) =>
-                  onFieldChange(
-                    "section8",
-                    `${key}.mainHeading`,
-                    e.target.value
-                  )
-                }
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginTop: 1 }}
               />
@@ -38,9 +32,7 @@ const Section8 = ({ formData, onFieldChange }) => {
                 label="Heading"
                 name={`${key}.Heading`}
                 value={formData[key].Heading}
-                onChange={(e) =>
-                  onFieldChange("section8", `${key}.Heading`, e.target.value)
-                }
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginTop: 1 }}
               />
@@ -53,9 +45,7 @@ const Section8 = ({ formData, onFieldChange }) => {
                 label="Text"
                 name={`${key}.Text`}
                 value={formData[key].Text}
-                onChange={(e) =>
-                  onFieldChange("section8", `${key}.Text`, e.target.value)
-                }
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginTop: 1 }}
               />
@@ -66,9 +56,7 @@ const Section8 = ({ formData, onFieldChange }) => {
                 label="Image URL"
                 name={`${key}.imageSrc`}
                 value={formData[key].imageSrc}
-                onChange={(e) =>
-                  onFieldChange("section8", `${key}.imageSrc`, e.target.value)
-                }
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginTop: 1 }}
               />
@@ -79,9 +67,7 @@ const Section8 = ({ formData, onFieldChange }) => {
                 label="Button Text"
                 name={`${key}.buttonText`}
                 value={formData[key].buttonText}
-                onChange={(e) =>
-                  onFieldChange("section8", `${key}.buttonText`, e.target.value)
-                }
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginTop: 1 }}
               />

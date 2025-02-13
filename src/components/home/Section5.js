@@ -17,9 +17,7 @@ const Section5 = ({ formData, onFieldChange }) => {
             label="Heading"
             name="heading"
             value={formData.heading}
-            onChange={(e) =>
-              onFieldChange("section5", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -34,9 +32,7 @@ const Section5 = ({ formData, onFieldChange }) => {
             label="Right Button Text"
             name="right.button"
             value={formData.right.button}
-            onChange={(e) =>
-              onFieldChange("section5", "right.button", e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -51,13 +47,7 @@ const Section5 = ({ formData, onFieldChange }) => {
                   label={`${formData.right[key].text} Image URL`}
                   name={`right.${key}.imgURL`}
                   value={formData.right[key].imgURL}
-                  onChange={(e) =>
-                    onFieldChange(
-                      "section5",
-                      `right.${key}.imgURL`,
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                   variant="outlined"
                 />
               </Grid>
@@ -74,9 +64,7 @@ const Section5 = ({ formData, onFieldChange }) => {
             label="Left Button Text"
             name="left.button"
             value={formData.left.button}
-            onChange={(e) =>
-              onFieldChange("section5", "left.button", e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -91,13 +79,7 @@ const Section5 = ({ formData, onFieldChange }) => {
                   label={`${formData.left[key].text} Image URL`}
                   name={`left.${key}.imgURL`}
                   value={formData.left[key].imgURL}
-                  onChange={(e) =>
-                    onFieldChange(
-                      "section5",
-                      `left.${key}.imgURL`,
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                   variant="outlined"
                 />
               </Grid>

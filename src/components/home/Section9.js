@@ -10,31 +10,33 @@ const Section9 = ({ formData, onFieldChange }) => {
       </Typography>
 
       <Grid container spacing={2}>
-        {formData.urls.map((url, index) => (
-          <Grid item xs={6} md={4} lg={3} key={index}>
-            <Paper
-              sx={{
-                padding: 2,
-                borderRadius: 2,
-                boxShadow: 3,
-                textAlign: "center",
-              }}
-            >
-              {/* TextField to edit URLs */}
-              <TextField
-                fullWidth
-                label={`Image URL ${index + 1}`}
-                value={url}
-                onChange={(e) => {
-                  const updatedUrls = [...formData.urls];
-                  updatedUrls[index] = e.target.value;
-                  onFieldChange("section9", "urls", updatedUrls);
+        {formData.urls && formData.urls.length > 0 ? (
+          formData.urls.map((url, index) => (
+            <Grid item xs={6} md={4} lg={3} key={index}>
+              <Paper
+                sx={{
+                  padding: 2,
+                  borderRadius: 2,
+                  boxShadow: 3,
+                  textAlign: "center",
                 }}
-                variant="outlined"
-              />
-            </Paper>
-          </Grid>
-        ))}
+              >
+                <TextField
+                  fullWidth
+                  label={`Image URL ${index + 1}`}
+                  name={`urls.${index}`} // Ensure proper name reference
+                  value={url}
+                  onChange={(e) =>
+                    onFieldChange(`urls.${index}`, e.target.value)
+                  }
+                  variant="outlined"
+                />
+              </Paper>
+            </Grid>
+          ))
+        ) : (
+          <Typography>No URLs available.</Typography>
+        )}
       </Grid>
     </Box>
   );

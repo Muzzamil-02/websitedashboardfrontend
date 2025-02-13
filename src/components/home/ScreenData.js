@@ -15,9 +15,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
         label="Image URL"
         name="image"
         value={formData.image}
-        onChange={(e) =>
-          onFieldChange("screendata", e.target.name, e.target.value)
-        }
+        onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
@@ -35,11 +33,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
                 label="Step Number"
                 name={`steps.${index}.number`}
                 value={step.number}
-                onChange={(e) => {
-                  const updatedSteps = [...formData.steps];
-                  updatedSteps[index].number = e.target.value;
-                  onFieldChange("screendata", "steps", updatedSteps);
-                }}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginBottom: 1 }}
               />
@@ -50,11 +44,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
                 label="Title"
                 name={`steps.${index}.title`}
                 value={step.title}
-                onChange={(e) => {
-                  const updatedSteps = [...formData.steps];
-                  updatedSteps[index].title = e.target.value;
-                  onFieldChange("screendata", "steps", updatedSteps);
-                }}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginBottom: 1 }}
               />
@@ -67,11 +57,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
                 label="Description"
                 name={`steps.${index}.description`}
                 value={step.description}
-                onChange={(e) => {
-                  const updatedSteps = [...formData.steps];
-                  updatedSteps[index].description = e.target.value;
-                  onFieldChange("screendata", "steps", updatedSteps);
-                }}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
               />
             </Paper>
@@ -91,9 +77,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
             label="Button Text"
             name="button.text"
             value={formData.button.text}
-            onChange={(e) =>
-              onFieldChange("screendata", "button.text", e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -103,9 +87,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
             label="Button Link"
             name="button.link"
             value={formData.button.link}
-            onChange={(e) =>
-              onFieldChange("screendata", "button.link", e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -123,9 +105,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
             label="Footer Text"
             name="footer.text"
             value={formData.footer.text}
-            onChange={(e) =>
-              onFieldChange("screendata", "footer.text", e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -135,9 +115,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
             label="Footer Link"
             name="footer.link"
             value={formData.footer.link}
-            onChange={(e) =>
-              onFieldChange("screendata", "footer.link", e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -147,9 +125,7 @@ const ScreenData = ({ formData, onFieldChange }) => {
             label="Footer Link Text"
             name="footer.linkText"
             value={formData.footer.linkText}
-            onChange={(e) =>
-              onFieldChange("screendata", "footer.linkText", e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>

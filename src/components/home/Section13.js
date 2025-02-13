@@ -17,9 +17,7 @@ const Section13 = ({ formData, onFieldChange }) => {
             label="Title"
             name="title"
             value={formData.title}
-            onChange={(e) =>
-              onFieldChange("section13", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -31,9 +29,7 @@ const Section13 = ({ formData, onFieldChange }) => {
             label="Highlight"
             name="highlight"
             value={formData.highlight}
-            onChange={(e) =>
-              onFieldChange("section13", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -45,9 +41,7 @@ const Section13 = ({ formData, onFieldChange }) => {
             label="Subtitle"
             name="subtitle"
             value={formData.subtitle}
-            onChange={(e) =>
-              onFieldChange("section13", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -61,9 +55,7 @@ const Section13 = ({ formData, onFieldChange }) => {
             label="Description"
             name="description"
             value={formData.description}
-            onChange={(e) =>
-              onFieldChange("section13", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -75,9 +67,7 @@ const Section13 = ({ formData, onFieldChange }) => {
             label="Image URL"
             name="image"
             value={formData.image}
-            onChange={(e) =>
-              onFieldChange("section13", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -98,11 +88,7 @@ const Section13 = ({ formData, onFieldChange }) => {
                 label="Location Name"
                 name={`locations.${index}.name`}
                 value={location.name}
-                onChange={(e) => {
-                  const updatedLocations = [...formData.locations];
-                  updatedLocations[index].name = e.target.value;
-                  onFieldChange("section13", "locations", updatedLocations);
-                }}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
                 sx={{ marginBottom: 1 }}
               />
@@ -115,11 +101,7 @@ const Section13 = ({ formData, onFieldChange }) => {
                 label="Location Address"
                 name={`locations.${index}.address`}
                 value={location.address}
-                onChange={(e) => {
-                  const updatedLocations = [...formData.locations];
-                  updatedLocations[index].address = e.target.value;
-                  onFieldChange("section13", "locations", updatedLocations);
-                }}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
               />
             </Paper>

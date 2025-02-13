@@ -13,11 +13,9 @@ const Section3 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="Heading"
-            name="heading"
-            value={formData.heading}
-            onChange={(e) =>
-              onFieldChange("section3", e.target.name, e.target.value)
-            }
+            name="Heading"
+            value={formData.Heading}
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -25,11 +23,9 @@ const Section3 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="SubHeading"
-            name="subheading"
-            value={formData.subheading}
-            onChange={(e) =>
-              onFieldChange("section3", e.target.name, e.target.value)
-            }
+            name="subHeading"
+            value={formData.subHeading}
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -37,11 +33,9 @@ const Section3 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="Text"
-            name="text"
-            value={formData.text}
-            onChange={(e) =>
-              onFieldChange("section3", e.target.name, e.target.value)
-            }
+            name="Text"
+            value={formData.Text}
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -50,11 +44,9 @@ const Section3 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="imageUrl"
-            name="imageUrl"
-            value={formData.imageUrl}
-            onChange={(e) =>
-              onFieldChange("section3", e.target.name, e.target.value)
-            }
+            name="imageSrc"
+            value={formData.imageSrc}
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
