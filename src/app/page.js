@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import {
   Container,
@@ -11,6 +11,8 @@ import {
   Tab,
   IconButton,
 } from "@mui/material";
+import { JsonFormatter } from "@/lib/helpers/helper";
+import { JsonToSLugFormatter } from "@/lib/helpers/helper";
 import AddIcon from "@mui/icons-material/Add";
 import Sidebar from "@/components/Sidebar";
 import Section1 from "@/components/home/Section1";
@@ -502,6 +504,45 @@ export default function Home() {
       });
     }
   };
+
+  useEffect(() => {
+    const data = JsonFormatter([
+      {
+        slug: "introduction",
+        attributes: {
+          title: "Welcome to Our Website",
+          content:
+            "This is the introduction section of the home page. Here you can find an overview of what we offer.",
+          image: "https://example.com/images/welcome.jpg",
+        },
+        lastModified: "2023-10-01T12:00:00.000Z",
+        _id: "67ac485df752cf8dc3ae3e88",
+      },
+      {
+        slug: "features",
+        attributes: {
+          title: "Features",
+          content:
+            "Explore the amazing features we provide to enhance your experience.",
+          image: "https://example.com/images/features.jpg",
+        },
+        lastModified: "2023-10-01T12:00:00.000Z",
+        _id: "67ac485df752cf8dc3ae3e89",
+      },
+      {
+        slug: "testimonials",
+        attributes: {
+          title: "What Our Users Say",
+          content: "Read testimonials from our satisfied users.",
+          image: "https://example.com/images/testimonials.jpg",
+        },
+        lastModified: "2023-10-01T12:00:00.000Z",
+        _id: "67ac485df752cf8dc3ae3e8a",
+      },
+    ]);
+    const slugData = JsonToSLugFormatter(data);
+    console.log(slugData);
+  });
 
   const handleFieldChange = (section, name, value) => {
     setFormData((prevData) => ({
