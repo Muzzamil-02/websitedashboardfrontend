@@ -13,44 +13,48 @@ import {
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Sidebar from "@/components/Sidebar";
-import Section1 from "@/components/about/Section1";
-import Section2 from "@/components/about/Section2";
-import Section3 from "@/components/about/Section3";
-import Section4 from "@/components/about/Section4";
-import Section5 from "@/components/about/Section5";
+import section1 from "@/components/about/Section1";
+import section2 from "@/components/about/Section2";
+import section3 from "@/components/about/Section3";
+import section4 from "@/components/about/Section4";
+import section5 from "@/components/about/Section5";
 
-import { homeEditData, homeGetData } from "@/services/home/service.js";
+import { homeEditData, homeGetData } from "@/services/about/service.js";
 import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
 import ScreenData from "@/components/home/ScreenData";
 
 const sectionComponents = {
-  Section1,
-  Section2,
-  Section3,
-  // Section4,
-  Section5,
+  section1,
+  section2,
+  section3,
+  section4,
+  section5,
 };
 
-export default function Home() {
-  const [languages, setLanguages] = useState(["English", "Finnish"]);
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
+export default function About() {
+  const [languages] = useState([
+    { label: "English", code: "en" },
+    { label: "Finnish", code: "fn" },
+    { label: "Arabic", code: "ar" },
+  ]);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [initialValues, setInitialValues] = useState({});
 
   useEffect(() => {
-    homeGetData()
+    homeGetData(selectedLanguage)
       .then((data) => {
         if (data) {
           setInitialValues(JsonFormatter(data));
         }
       })
       .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  }, [selectedLanguage]);
 
   const handleSaveChanges = (values) => {
     console.log("Form Data Submitted:", values);
     alert("Form submitted! Check console for data.");
-    const formatteddata = JsonToSLugFormatter(values);
-    homeEditData(formatteddata);
+    const formattedData = JsonToSLugFormatter(values);
+    homeEditData(formattedData, selectedLanguage);
   };
 
   return (
@@ -64,7 +68,7 @@ export default function Home() {
           scrollButtons="auto"
         >
           {languages.map((lang) => (
-            <Tab key={lang} label={lang} value={lang} />
+            <Tab key={lang.code} label={lang.label} value={lang.code} />
           ))}
         </Tabs>
 
@@ -73,11 +77,12 @@ export default function Home() {
           enableReinitialize
           onSubmit={handleSaveChanges}
         >
-          {({ values, handleChange, handleBlur, setFieldValue }) => (
+          {({ values, handleBlur, setFieldValue }) => (
             <Form>
               <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
                 {Object.keys(values || {}).map((section) => {
                   const Component = sectionComponents[section];
+
                   return Component ? (
                     <Box key={section} sx={{ marginBottom: 2 }}>
                       <Component

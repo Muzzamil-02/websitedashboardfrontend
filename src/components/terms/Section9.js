@@ -5,7 +5,7 @@ const Section9 = ({ formData, onFieldChange }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Typography variant="h6">section9Section9</Typography>
+        <Typography variant="h6">section9</Typography>
       </Grid>
       <TextField
         fullWidth

@@ -4,7 +4,7 @@ import client from "../client";
 
 export const homeEditData = async (data, lang) => {
   try {
-    await client.put(`/pages/${lang}/home`, data);
+    await client.put(`/pages/${lang}/term`, data);
     console.log(`Data saved successfully for language: ${lang}`);
   } catch (error) {
     console.error(`Error saving data for language ${lang}:`, error);
@@ -13,7 +13,7 @@ export const homeEditData = async (data, lang) => {
 
 export const homeGetData = async (lang) => {
   try {
-    const result = await client.get(`/pages/${lang}/home`);
+    const result = await client.get(`/pages/${lang}/term`);
     console.log(`Data fetched successfully for language: ${lang}`);
     return result.data;
   } catch (error) {

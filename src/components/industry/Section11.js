@@ -2,11 +2,11 @@
 
 import { Grid, TextField, Typography } from "@mui/material";
 
-const Section10 = ({ formData, onFieldChange }) => {
+const Section11 = ({ formData, onFieldChange }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        Section 10
+        Section 11
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -62,4 +62,4 @@ const Section10 = ({ formData, onFieldChange }) => {
   );
 };
 
-export default Section10;
+export default Section11;

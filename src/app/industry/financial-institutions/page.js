@@ -1,258 +1,70 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  Container,
-  Paper,
-  Box,
-  Button,
-  Tabs,
-  Tab,
-  IconButton,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import React, { useEffect, useState } from "react";
+import { Container, Paper, Button, Box, Tabs, Tab } from "@mui/material";
+import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
-import Section1 from "@/components/industry/Section1";
-import Section2 from "@/components/industry/Section2";
-import Section3 from "@/components/industry/Section3";
-import Section4 from "@/components/industry/Section4";
-import Section5 from "@/components/industry/Section5";
-import Section6 from "@/components/industry/Section6";
-import Section7 from "@/components/industry/Section7";
-import Section8 from "@/components/industry/Section8";
-import Section9 from "@/components/industry/Section9";
-import Section10 from "@/components/industry/Section10";
-import Section12 from "@/components/industry/Section12";
-import KeyStakeholderSlider from "@/components/industry/KeyStakeholderSlider";
-import SecondSwiper from "@/components/industry/SecondSwiper";
+import { homeEditData, homeGetData } from "@/services/industry/service.js";
+import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
+import section1 from "@/components/industry/Section1";
+import section2 from "@/components/industry/Section2";
+import section3 from "@/components/industry/Section3";
+import section4 from "@/components/industry/Section4";
+import section5 from "@/components/industry/Section5";
+import section6 from "@/components/industry/Section6";
+import section7 from "@/components/industry/Section7";
+import section8 from "@/components/industry/Section8";
+import section9 from "@/components/industry/Section9";
+import section10 from "@/components/industry/Section10";
+
+import section12 from "@/components/industry/Section12";
+import keyskaeholderslider from "@/components/industry/KeyStakeholderSlider";
+
+import secondSwiper from "@/components/industry/Section12";
+import { Agriculture } from "@mui/icons-material";
 
 const sectionComponents = {
-  section1: Section1,
-  section2: Section2,
-  section3: Section3,
-  section4: Section4,
-  section5: Section5,
-  section6: Section6,
-  section7: Section7,
-  section8: Section8,
-  section9: Section9,
-  section10: Section10,
-  section12: Section12,
-  keyskaeholderslider: KeyStakeholderSlider,
-  secondSwiper: SecondSwiper,
+  section1,
+  section2,
+  section3,
+  section4,
+  section5,
+  section6,
+  section7,
+  section8,
+  section9,
+  section10,
+
+  section12,
+
+  keyskaeholderslider,
+  secondSwiper,
 };
 
-const initialFormData = {
-  English: {
-    section1: {
-      heading: "",
-      description: "",
-      buttonText: "",
-      imageUrl: "",
-    },
-    section2: {
-      heading: "",
-      description: "",
-    },
-    section3: {
-      imageUrl: "",
-    },
-    section4: {
-      heading: "",
-      components: [
-        {
-          title: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          imageUrl: "",
-        },
-      ],
-    },
-    section5: {
-      heading: "",
-      component: [
-        {
-          title: "",
-          imageURL: "",
-        },
-      ],
-    },
-    section6: {
-      heading: "",
-      description: "",
-    },
-    section7: {
-      component: [
-        {
-          title: "",
-          description: "",
-          logoURL: "",
-        },
-      ],
-    },
-    section8: { imageUrl: "" },
-    section9: {
-      heading: "",
-      description: "",
-      imageUrl: "",
-    },
-    section10: {
-      heading: "",
-      subHeading: "",
-      text: "",
-      imageUrl: "",
-    },
-    section12: {
-      heading: "",
-      highlightText: "",
-      description1: "",
-      description2: "",
-      imageUrl: "",
-    },
-    keyskaeholderslider: {
-      heading: "",
-      components: [
-        {
-          title: "",
-          description: "",
-        },
-        {
-          title: "",
-          description: "",
-        },
-        {
-          title: "",
-          description: "",
-        },
-        {
-          title: "",
-          description: "",
-        },
-        {
-          title: "",
-          description: "",
-        },
-        {
-          title: "",
-          description: "",
-        },
-      ],
-    },
-    secondSwiper: {
-      mainHeading: "",
-      heading: "",
-      description: "",
-      components: [
-        {
-          title: "",
-          description: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          description: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          description: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          description: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          description: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          description: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          description: "",
-          imageUrl: "",
-        },
-        {
-          title: "",
-          description: "",
-          imageUrl: "",
-        },
-      ],
-    },
-  },
-};
+export default function Home() {
+  const [languages] = useState([
+    { label: "English", code: "en" },
+    { label: "Finnish", code: "fn" },
+    { label: "Arabic", code: "ar" },
+  ]);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [initialValues, setInitialValues] = useState({});
 
-export default function AgriculturePage() {
-  const [languages, setLanguages] = useState(["English", "Finnish"]);
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
-  const [formData, setFormData] = useState(initialFormData);
+  useEffect(() => {
+    homeGetData(selectedLanguage, "financial")
+      .then((data) => {
+        if (data) {
+          setInitialValues(JsonFormatter(data));
+        }
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, [selectedLanguage]);
 
-  const handleLanguageChange = (event, newValue) => {
-    setSelectedLanguage(newValue);
-  };
-
-  const handleAddLanguage = () => {
-    const newLanguage = prompt("Enter new language name:");
-    if (newLanguage && !languages.includes(newLanguage)) {
-      setLanguages([...languages, newLanguage]);
-      setFormData({
-        ...formData,
-        [newLanguage]: {
-          section1: {},
-          section2: {},
-          section3: {},
-          section4: {},
-          section5: {},
-          section6: {},
-          section7: {},
-          section8: {},
-          section9: {},
-          section10: {},
-          section12: {},
-          keyskaeholderslider: {},
-          secondSwiper: {},
-        },
-      });
-    }
-  };
-
-  const handleFieldChange = (section, name, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [selectedLanguage]: {
-        ...prevData[selectedLanguage],
-        [section]: { ...prevData[selectedLanguage][section], [name]: value },
-      },
-    }));
-  };
-
-  const handleSaveChanges = () => {
-    console.log("Form Data Submitted:", formData);
+  const handleSaveChanges = (values) => {
+    console.log("Form Data Submitted:", values);
     alert("Form submitted! Check console for data.");
+    const formattedData = JsonToSLugFormatter(values);
+    homeEditData(formattedData, selectedLanguage, "financial");
   };
 
   return (
@@ -261,42 +73,53 @@ export default function AgriculturePage() {
       <Container sx={{ flexGrow: 1, padding: 3 }}>
         <Tabs
           value={selectedLanguage}
-          onChange={handleLanguageChange}
+          onChange={(event, newValue) => setSelectedLanguage(newValue)}
           variant="scrollable"
           scrollButtons="auto"
         >
           {languages.map((lang) => (
-            <Tab key={lang} label={lang} value={lang} />
+            <Tab key={lang.code} label={lang.label} value={lang.code} />
           ))}
-          <IconButton onClick={handleAddLanguage}>
-            <AddIcon />
-          </IconButton>
         </Tabs>
 
-        <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
-          {Object.keys(formData[selectedLanguage] || {}).map((section) => {
-            const Component = sectionComponents[section];
-            return Component ? (
-              <Box key={section} sx={{ marginBottom: 2 }}>
-                <Component
-                  formData={formData[selectedLanguage][section]}
-                  onFieldChange={handleFieldChange}
-                />
-              </Box>
-            ) : null;
-          })}
+        <Formik
+          initialValues={initialValues}
+          enableReinitialize
+          onSubmit={handleSaveChanges}
+        >
+          {({ values, handleBlur, setFieldValue }) => (
+            <Form>
+              <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
+                {Object.keys(values || {}).map((section) => {
+                  const Component = sectionComponents[section];
 
-          <Box textAlign="center" sx={{ marginTop: 3 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ padding: "10px 20px", fontSize: "16px" }}
-              onClick={handleSaveChanges}
-            >
-              Save Changes
-            </Button>
-          </Box>
-        </Paper>
+                  return Component ? (
+                    <Box key={section} sx={{ marginBottom: 2 }}>
+                      <Component
+                        formData={values[section]}
+                        onFieldChange={(field, value) =>
+                          setFieldValue(`${section}.${field}`, value)
+                        }
+                        onBlur={handleBlur}
+                      />
+                    </Box>
+                  ) : null;
+                })}
+
+                <Box textAlign="center" sx={{ marginTop: 3 }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    sx={{ padding: "10px 20px", fontSize: "16px" }}
+                  >
+                    Save Changes
+                  </Button>
+                </Box>
+              </Paper>
+            </Form>
+          )}
+        </Formik>
       </Container>
     </Box>
   );
