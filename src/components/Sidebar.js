@@ -12,7 +12,7 @@ import {
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import WorkIcon from "@mui/icons-material/Work";
+// import WorkIcon from "@mui/icons-material/Work";
 import { useState } from "react";
 
 const Sidebar = () => {
@@ -37,7 +37,6 @@ const Sidebar = () => {
       text: "Advisory",
 
       path: "/advisory",
-      selected: true,
     },
     {
       id: 5,
@@ -84,25 +83,23 @@ const Sidebar = () => {
         },
       ],
     },
+    // {
+    //   id: 22,
+    //   text: "Contact Us",
+    //   path: "/contactus",
+
+    // },
     {
       id: 22,
-      text: "Contact Us",
-      path: "/contactus",
-      selected: true,
-    },
-    {
-      id: 23,
       text: "Term",
 
       path: "/term",
-      selected: true,
     },
     {
-      id: 24,
+      id: 23,
       text: "Policy",
 
       path: "policy",
-      selected: true,
     },
   ];
 
@@ -116,6 +113,7 @@ const Sidebar = () => {
           width: 240,
           boxSizing: "border-box",
           backgroundColor: "#f8f9fc",
+          color: "#d30c0b",
         },
       }}
     >
@@ -141,7 +139,7 @@ const Sidebar = () => {
                 border: "none",
                 cursor: "pointer",
                 padding: "10px 15px",
-                "&:hover": { backgroundColor: "#e0e7ff" },
+                "&:hover": { backgroundColor: "#d30c0b", color: "#fff" },
               }}
             >
               <ListItemIcon sx={{ color: "#2962ff" }}>{item.icon}</ListItemIcon>
@@ -162,20 +160,20 @@ const Sidebar = () => {
                       component="button"
                       onClick={() => router.push(subItem.path)}
                       sx={{
-                        paddingLeft: 4,
+                        paddingLeft: 6,
                         textAlign: "left",
                         width: "100%",
                         display: "flex",
                         alignItems: "center",
                         border: "none",
                         cursor: "pointer",
-                        padding: "8px 15px",
-                        "&:hover": { backgroundColor: "#f0f4ff" },
+                        padding: "19px 55px",
+                        "&:hover": { backgroundColor: "#d30c0b" },
                       }}
                     >
-                      <ListItemIcon sx={{ color: "#2962ff" }}>
+                      {/* <ListItemIcon sx={{ color: "#2962ff" }}>
                         <WorkIcon />
-                      </ListItemIcon>
+                      </ListItemIcon> */}
                       <ListItemText primary={subItem.text} />
                     </ListItem>
                   ))}

@@ -58,7 +58,7 @@ export default function About() {
   };
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fc" }}>
+    <Box sx={{ display: "flex", backgroundColor: "#f8f9fc" }}>
       <Sidebar />
       <Container sx={{ flexGrow: 1, padding: 3 }}>
         <Tabs
