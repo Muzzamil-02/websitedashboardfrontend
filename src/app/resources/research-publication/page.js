@@ -1,88 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  Container,
-  Paper,
-  Box,
-  Button,
-  Tabs,
-  Tab,
-  IconButton,
-  TextField,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import React, { useEffect, useState } from "react";
+import { Container, Paper, Button, Box, Tabs, Tab } from "@mui/material";
+import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
+import { homeEditData, homeGetData } from "@/services/publications/service.js";
+import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
 import Section1 from "@/components/publication/Section1";
 import Section2 from "@/components/publication/Section2";
 
 const sectionComponents = {
-  section1: Section1,
-  section2: Section2,
+  Section1,
+  Section2,
 };
 
-const initialFormData = {
-  English: {
-    section1: {
-      heading: "Research & Publications",
-      description:
-        "Explore Spectreco’s collection of in-depth reports, whitepapers, and industry insights designed to help you navigate the evolving ESG landscape.",
-      imageSrc:
-        "https://spectreco.com/wp-content/uploads/2024/11/Copy-of-The-Transition-of-the-Real-Estate-Sector-2.jpg",
-    },
-    section2: {
-      list: [
-        {
-          title: "WHITE PAPER",
-          heading: "Capital Markets as Catalysts for Net Zero Targets",
-          description:
-            "This whitepaper explores the pivotal role of capital markets in advancing Saudi Arabia’s decarbonization goals under Vision 2030.",
-          buttonText: "Read More",
-          imageSrc:
-            "https://spectreco.com/wp-content/uploads/2024/11/Capital-Markets-as-Catalysts-for-Net-Zero-Targets-in-the-Decarbonization-Journey-of-Saudi-Arabia-A-White-Paper-1.jpg",
-        },
-      ],
-    },
-  },
-};
+export default function Home() {
+  const [languages] = useState([
+    { label: "English", code: "en" },
+    { label: "Finnish", code: "fn" },
+    { label: "Arabic", code: "ar" },
+  ]);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [initialValues, setInitialValues] = useState({});
 
-export default function ResourcesPage() {
-  const [languages, setLanguages] = useState(["English"]);
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
-  const [formData, setFormData] = useState(initialFormData);
+  useEffect(() => {
+    homeGetData(selectedLanguage)
+      .then((data) => {
+        if (data) {
+          setInitialValues(JsonFormatter(data));
+        }
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, [selectedLanguage]);
 
-  const handleLanguageChange = (event, newValue) => {
-    setSelectedLanguage(newValue);
-  };
-
-  const handleAddLanguage = () => {
-    const newLanguage = prompt("Enter new language name:");
-    if (newLanguage && !languages.includes(newLanguage)) {
-      setLanguages([...languages, newLanguage]);
-      setFormData({
-        ...formData,
-        [newLanguage]: {
-          section1: {},
-          section2: { list: [] },
-        },
-      });
-    }
-  };
-
-  const handleFieldChange = (section, name, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [selectedLanguage]: {
-        ...prevData[selectedLanguage],
-        [section]: { ...prevData[selectedLanguage][section], [name]: value },
-      },
-    }));
-  };
-
-  const handleSaveChanges = () => {
-    console.log("Form Data Submitted:", formData);
+  const handleSaveChanges = (values) => {
+    console.log("Form Data Submitted:", values);
     alert("Form submitted! Check console for data.");
+    const formattedData = JsonToSLugFormatter(values);
+    homeEditData(formattedData, selectedLanguage);
   };
+  console.log("initial", initialValues);
 
   return (
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fc" }}>
@@ -90,42 +47,53 @@ export default function ResourcesPage() {
       <Container sx={{ flexGrow: 1, padding: 3 }}>
         <Tabs
           value={selectedLanguage}
-          onChange={handleLanguageChange}
+          onChange={(event, newValue) => setSelectedLanguage(newValue)}
           variant="scrollable"
           scrollButtons="auto"
         >
           {languages.map((lang) => (
-            <Tab key={lang} label={lang} value={lang} />
+            <Tab key={lang.code} label={lang.label} value={lang.code} />
           ))}
-          <IconButton onClick={handleAddLanguage}>
-            <AddIcon />
-          </IconButton>
         </Tabs>
 
-        <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
-          {Object.keys(formData[selectedLanguage] || {}).map((section) => {
-            const Component = sectionComponents[section];
-            return Component ? (
-              <Box key={section} sx={{ marginBottom: 2 }}>
-                <Component
-                  formData={formData[selectedLanguage][section]}
-                  onFieldChange={handleFieldChange}
-                />
-              </Box>
-            ) : null;
-          })}
+        <Formik
+          initialValues={initialValues}
+          enableReinitialize
+          onSubmit={handleSaveChanges}
+        >
+          {({ values, handleBlur, setFieldValue }) => (
+            <Form>
+              <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
+                {Object.keys(values || {}).map((section) => {
+                  const Component = sectionComponents[section];
 
-          <Box textAlign="center" sx={{ marginTop: 3 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ padding: "10px 20px", fontSize: "16px" }}
-              onClick={handleSaveChanges}
-            >
-              Save Changes
-            </Button>
-          </Box>
-        </Paper>
+                  return Component ? (
+                    <Box key={section} sx={{ marginBottom: 2 }}>
+                      <Component
+                        formData={values[section]}
+                        onFieldChange={(field, value) =>
+                          setFieldValue(`${section}.${field}`, value)
+                        }
+                        onBlur={handleBlur}
+                      />
+                    </Box>
+                  ) : null;
+                })}
+
+                <Box textAlign="center" sx={{ marginTop: 3 }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    sx={{ padding: "10px 20px", fontSize: "16px" }}
+                  >
+                    Save Changes
+                  </Button>
+                </Box>
+              </Paper>
+            </Form>
+          )}
+        </Formik>
       </Container>
     </Box>
   );

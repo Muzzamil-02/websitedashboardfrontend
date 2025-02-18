@@ -15,9 +15,7 @@ const Section12 = ({ formData, onFieldChange }) => {
             label="Heading"
             name="heading"
             value={formData.heading}
-            onChange={(e) =>
-              onFieldChange("section12", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -27,9 +25,7 @@ const Section12 = ({ formData, onFieldChange }) => {
             label="Highlight Text"
             name="highlightText"
             value={formData.highlightText}
-            onChange={(e) =>
-              onFieldChange("section12", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -39,9 +35,7 @@ const Section12 = ({ formData, onFieldChange }) => {
             label="Description 1"
             name="description1"
             value={formData.description1}
-            onChange={(e) =>
-              onFieldChange("section12", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -51,9 +45,7 @@ const Section12 = ({ formData, onFieldChange }) => {
             label="Description 2"
             name="description2"
             value={formData.description2}
-            onChange={(e) =>
-              onFieldChange("section12", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -63,9 +55,7 @@ const Section12 = ({ formData, onFieldChange }) => {
             label="Image URL"
             name="imageUrl"
             value={formData.imageUrl}
-            onChange={(e) =>
-              onFieldChange("section12", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>

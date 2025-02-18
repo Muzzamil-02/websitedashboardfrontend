@@ -13,7 +13,7 @@ const Section1 = ({ formData, onFieldChange }) => {
           label="Heading"
           name="heading"
           value={formData.heading}
-          onChange={(e) => onFieldChange("section1", "heading", e.target.value)}
+          onChange={(e) => onFieldChange("heading", e.target.value)}
           variant="outlined"
           sx={{ marginBottom: 2 }}
         />
@@ -26,9 +26,7 @@ const Section1 = ({ formData, onFieldChange }) => {
           label="Description"
           name="description"
           value={formData.description}
-          onChange={(e) =>
-            onFieldChange("section1", "description", e.target.value)
-          }
+          onChange={(e) => onFieldChange("description", e.target.value)}
           variant="outlined"
           multiline
           rows={4}

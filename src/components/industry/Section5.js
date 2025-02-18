@@ -15,9 +15,7 @@ const Section5 = ({ formData, onFieldChange }) => {
             label="Heading"
             name="heading"
             value={formData.heading}
-            onChange={(e) =>
-              onFieldChange("section5", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -33,11 +31,7 @@ const Section5 = ({ formData, onFieldChange }) => {
                 name={`component[${index}].title`}
                 value={item.title}
                 onChange={(e) =>
-                  onFieldChange(
-                    `section5.component[${index}]`,
-                    "title",
-                    e.target.value
-                  )
+                  onFieldChange(`component[${index}]`, "title", e.target.value)
                 }
                 variant="outlined"
               />
@@ -52,7 +46,7 @@ const Section5 = ({ formData, onFieldChange }) => {
                     value={content.subtitle}
                     onChange={(e) =>
                       onFieldChange(
-                        `section5.component[${index}].content[${subIndex}]`,
+                        `component[${index}].content[${subIndex}]`,
                         "subtitle",
                         e.target.value
                       )
@@ -68,7 +62,7 @@ const Section5 = ({ formData, onFieldChange }) => {
                     value={content.description}
                     onChange={(e) =>
                       onFieldChange(
-                        `section5.component[${index}].content[${subIndex}]`,
+                        `component[${index}].content[${subIndex}]`,
                         "description",
                         e.target.value
                       )
@@ -86,7 +80,7 @@ const Section5 = ({ formData, onFieldChange }) => {
                 value={item.imageURL}
                 onChange={(e) =>
                   onFieldChange(
-                    `section5.component[${index}]`,
+                    `component[${index}]`,
                     "imageURL",
                     e.target.value
                   )

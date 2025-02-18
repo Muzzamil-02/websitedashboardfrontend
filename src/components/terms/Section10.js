@@ -12,7 +12,7 @@ const Section10 = ({ formData, onFieldChange }) => {
         label="Heading"
         name="heading"
         value={formData.heading}
-        onChange={(e) => onFieldChange("section10", "heading", e.target.value)}
+        onChange={(e) => onFieldChange("heading", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
@@ -22,9 +22,7 @@ const Section10 = ({ formData, onFieldChange }) => {
           label="Description"
           name="description"
           value={formData.description}
-          onChange={(e) =>
-            onFieldChange("section10", e.target.name, e.target.value)
-          }
+          onChange={(e) => onFieldChange(e.target.name, e.target.value)}
           variant="outlined"
         />
       </Grid>

@@ -16,9 +16,7 @@ const SecondSwiper = ({ formData, onFieldChange }) => {
         label="Main Heading"
         name="mainHeading"
         value={formData.mainHeading}
-        onChange={(e) =>
-          onFieldChange("secondSwiper", "mainHeading", e.target.value)
-        }
+        onChange={(e) => onFieldChange("mainHeading", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
@@ -29,9 +27,7 @@ const SecondSwiper = ({ formData, onFieldChange }) => {
         label="Heading"
         name="heading"
         value={formData.heading}
-        onChange={(e) =>
-          onFieldChange("secondSwiper", "heading", e.target.value)
-        }
+        onChange={(e) => onFieldChange("heading", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
@@ -42,9 +38,7 @@ const SecondSwiper = ({ formData, onFieldChange }) => {
         label="Description"
         name="description"
         value={formData.description}
-        onChange={(e) =>
-          onFieldChange("secondSwiper", "description", e.target.value)
-        }
+        onChange={(e) => onFieldChange("description", e.target.value)}
         variant="outlined"
         multiline
         rows={4}
@@ -60,12 +54,7 @@ const SecondSwiper = ({ formData, onFieldChange }) => {
               name={`components[${index}].title`}
               value={component.title}
               onChange={(e) =>
-                onFieldChange(
-                  "secondSwiper",
-                  `components[${index}]`,
-                  "title",
-                  e.target.value
-                )
+                onFieldChange(`components[${index}]`, "title", e.target.value)
               }
               variant="outlined"
             />
@@ -79,7 +68,6 @@ const SecondSwiper = ({ formData, onFieldChange }) => {
               value={component.description}
               onChange={(e) =>
                 onFieldChange(
-                  "secondSwiper",
                   `components[${index}]`,
                   "description",
                   e.target.value
@@ -97,7 +85,6 @@ const SecondSwiper = ({ formData, onFieldChange }) => {
               value={component.imageUrl}
               onChange={(e) =>
                 onFieldChange(
-                  "secondSwiper",
                   `components[${index}]`,
                   "imageUrl",
                   e.target.value

@@ -9,21 +9,19 @@ const Section1 = ({ formData, onFieldChange }) => {
       <TextField
         fullWidth
         label="Heading"
-        value={formData.heading || ""}
-        onChange={(e) => onFieldChange("section1", "heading", e.target.value)}
+        value={formData.Heading || ""}
+        onChange={(e) => onFieldChange("Heading", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
 
       <TextField
         fullWidth
-        label="Description"
+        label="Text"
         multiline
         rows={3}
-        value={formData.description || ""}
-        onChange={(e) =>
-          onFieldChange("section1", "description", e.target.value)
-        }
+        value={formData.Text || ""}
+        onChange={(e) => onFieldChange("Text", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
@@ -31,8 +29,8 @@ const Section1 = ({ formData, onFieldChange }) => {
       <TextField
         fullWidth
         label="Image URL"
-        value={formData.imageSrc || ""}
-        onChange={(e) => onFieldChange("section1", "imageSrc", e.target.value)}
+        value={formData.image || ""}
+        onChange={(e) => onFieldChange("image", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />

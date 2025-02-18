@@ -2,28 +2,30 @@ import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
 const Section2 = ({ formData, onFieldChange }) => {
-  const handleListChange = (index, field, value) => {
-    const updatedList = [...formData.list];
-    updatedList[index] = { ...updatedList[index], [field]: value };
-    onFieldChange("section2", "list", updatedList);
-  };
+  // const handleListChange = (index, field, value) => {
+  //   const updatedList = [...formData.list];
+  //   updatedList[index] = { ...updatedList[index], [field]: value };
+  //   onFieldChange( "list", updatedList);
+  // };
+  // console.log("form", formData);
 
   const handleAddNewItem = () => {
     const newItem = {
-      title: "",
-      heading: "",
-      description: "",
-      buttonText: "",
-      imageSrc: "",
+      img: "",
+      title1: "",
+      Heading: "",
+      text1: "",
+      text2: "",
+      btn: "",
     };
-    onFieldChange("section2", "list", [...formData.list, newItem]);
+    onFieldChange("sections", [...formData.sections, newItem]);
   };
 
   return (
     <Box>
       <Typography variant="h6">Section 2 - Whitepapers & Reports</Typography>
 
-      {formData.list?.map((item, index) => (
+      {formData.sections?.map((item, index) => (
         <Box
           key={index}
           sx={{
@@ -36,8 +38,10 @@ const Section2 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="Title"
-            value={item.title || ""}
-            onChange={(e) => handleListChange(index, "title", e.target.value)}
+            value={item.title1 || ""}
+            onChange={(e) =>
+              onFieldChange(`sections[${index}].title1`, e.target.value)
+            }
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
@@ -45,20 +49,29 @@ const Section2 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="Heading"
-            value={item.heading || ""}
-            onChange={(e) => handleListChange(index, "heading", e.target.value)}
+            value={item.Heading || ""}
+            onChange={(e) =>
+              onFieldChange(`sections[${index}].Heading`, e.target.value)
+            }
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
-
           <TextField
             fullWidth
-            label="Description"
-            multiline
-            rows={3}
-            value={item.description || ""}
+            label="Text1"
+            value={item.text1 || ""}
             onChange={(e) =>
-              handleListChange(index, "description", e.target.value)
+              onFieldChange(`sections[${index}].text1`, e.target.value)
+            }
+            variant="outlined"
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            fullWidth
+            label="Text2"
+            value={item.text2 || ""}
+            onChange={(e) =>
+              onFieldChange(`sections[${index}].text2`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 2 }}
@@ -67,9 +80,9 @@ const Section2 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="Button Text"
-            value={item.buttonText || ""}
+            value={item.btn || ""}
             onChange={(e) =>
-              handleListChange(index, "buttonText", e.target.value)
+              onFieldChange(`sections[${index}].btn`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 2 }}
@@ -78,9 +91,9 @@ const Section2 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="Image URL"
-            value={item.imageSrc || ""}
+            value={item.img || ""}
             onChange={(e) =>
-              handleListChange(index, "imageSrc", e.target.value)
+              onFieldChange(`sections[${index}].img`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 2 }}

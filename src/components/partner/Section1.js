@@ -15,9 +15,7 @@ const Section1 = ({ formData, onFieldChange }) => {
           label="Heading"
           name="heading"
           value={formData.heading}
-          onChange={(e) =>
-            onFieldChange("section1", e.target.name, e.target.value)
-          }
+          onChange={(e) => onFieldChange(e.target.name, e.target.value)}
           variant="outlined"
         />
       </Grid>
@@ -27,9 +25,7 @@ const Section1 = ({ formData, onFieldChange }) => {
           label="Description"
           name="description"
           value={formData.description}
-          onChange={(e) =>
-            onFieldChange("section1", e.target.name, e.target.value)
-          }
+          onChange={(e) => onFieldChange(e.target.name, e.target.value)}
           variant="outlined"
           multiline
           rows={4}
@@ -41,9 +37,7 @@ const Section1 = ({ formData, onFieldChange }) => {
           label="Button Text"
           name="buttonText"
           value={formData.buttonText}
-          onChange={(e) =>
-            onFieldChange("section1", e.target.name, e.target.value)
-          }
+          onChange={(e) => onFieldChange(e.target.name, e.target.value)}
           variant="outlined"
         />
       </Grid>
@@ -53,9 +47,7 @@ const Section1 = ({ formData, onFieldChange }) => {
           label="Image URL"
           name="imageUrl"
           value={formData.imageUrl}
-          onChange={(e) =>
-            onFieldChange("section1", e.target.name, e.target.value)
-          }
+          onChange={(e) => onFieldChange(e.target.name, e.target.value)}
           variant="outlined"
         />
       </Grid>

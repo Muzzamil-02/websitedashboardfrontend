@@ -2,6 +2,19 @@ import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
 const Section2 = ({ formData, onFieldChange }) => {
+  const handleAddArticle = () => {
+    console.log("in");
+    const newArticle = {
+      image: "",
+      title: "",
+      description: "",
+      category: "",
+      date: "",
+    };
+    const updatedArticles = [...formData.articles, newArticle];
+    onFieldChange("articles", updatedArticles); // Updates the parent formData
+  };
+
   return (
     <div>
       {/* Title */}
@@ -9,7 +22,7 @@ const Section2 = ({ formData, onFieldChange }) => {
         fullWidth
         label="Title"
         value={formData.title}
-        onChange={(e) => onFieldChange("section2", "title", e.target.value)}
+        onChange={(e) => onFieldChange("title", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
@@ -23,11 +36,7 @@ const Section2 = ({ formData, onFieldChange }) => {
             label={`Image URL for Article ${index + 1}`}
             value={article.image}
             onChange={(e) =>
-              onFieldChange(
-                "section2",
-                `articles.${index}.image`,
-                e.target.value
-              )
+              onFieldChange(`articles.${index}.image`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 1 }}
@@ -39,11 +48,7 @@ const Section2 = ({ formData, onFieldChange }) => {
             label={`Title for Article ${index + 1}`}
             value={article.title}
             onChange={(e) =>
-              onFieldChange(
-                "section2",
-                `articles.${index}.title`,
-                e.target.value
-              )
+              onFieldChange(`articles.${index}.title`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 1 }}
@@ -55,11 +60,7 @@ const Section2 = ({ formData, onFieldChange }) => {
             label={`Description for Article ${index + 1}`}
             value={article.description}
             onChange={(e) =>
-              onFieldChange(
-                "section2",
-                `articles.${index}.description`,
-                e.target.value
-              )
+              onFieldChange(`articles.${index}.description`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 1 }}
@@ -71,11 +72,7 @@ const Section2 = ({ formData, onFieldChange }) => {
             label={`Category for Article ${index + 1}`}
             value={article.category}
             onChange={(e) =>
-              onFieldChange(
-                "section2",
-                `articles.${index}.category`,
-                e.target.value
-              )
+              onFieldChange(`articles.${index}.category`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 1 }}
@@ -87,11 +84,7 @@ const Section2 = ({ formData, onFieldChange }) => {
             label={`Date for Article ${index + 1}`}
             value={article.date}
             onChange={(e) =>
-              onFieldChange(
-                "section2",
-                `articles.${index}.date`,
-                e.target.value
-              )
+              onFieldChange(`articles.${index}.date`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 2 }}
@@ -101,22 +94,8 @@ const Section2 = ({ formData, onFieldChange }) => {
 
       {/* Add Article Button */}
       <Box textAlign="center">
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => {
-            const newArticle = {
-              image: "",
-              title: "",
-              description: "",
-              category: "",
-              date: "",
-            };
-            const updatedArticles = [...formData.articles, newArticle];
-            onFieldChange("section2", "articles", updatedArticles);
-          }}
-        >
-          Add Article
+        <Button variant="contained" onClick={handleAddArticle}>
+          Add New Article
         </Button>
       </Box>
     </div>

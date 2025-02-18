@@ -15,9 +15,7 @@ const Section3 = ({ formData, onFieldChange }) => {
           label="Heading"
           name="heading"
           value={formData.heading}
-          onChange={(e) =>
-            onFieldChange("section3", e.target.name, e.target.value)
-          }
+          onChange={(e) => onFieldChange(e.target.name, e.target.value)}
           variant="outlined"
         />
       </Grid>
@@ -30,11 +28,7 @@ const Section3 = ({ formData, onFieldChange }) => {
             name={`components[${index}].text`}
             value={component.text}
             onChange={(e) =>
-              onFieldChange(
-                "section3",
-                `components[${index}].text`,
-                e.target.value
-              )
+              onFieldChange(`components[${index}].text`, e.target.value)
             }
             variant="outlined"
             multiline

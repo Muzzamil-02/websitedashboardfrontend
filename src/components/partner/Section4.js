@@ -14,9 +14,7 @@ const Section4 = ({ formData, onFieldChange }) => {
         label="Text"
         name="text"
         value={formData.text}
-        onChange={(e) =>
-          onFieldChange("section4", e.target.name, e.target.value)
-        }
+        onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
         multiline
         rows={4}
@@ -26,9 +24,7 @@ const Section4 = ({ formData, onFieldChange }) => {
         label="Button Text"
         name="buttonText"
         value={formData.buttonText}
-        onChange={(e) =>
-          onFieldChange("section4", e.target.name, e.target.value)
-        }
+        onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
       />
       <TextField
@@ -36,9 +32,7 @@ const Section4 = ({ formData, onFieldChange }) => {
         label="Image URL"
         name="imageUrl"
         value={formData.imageUrl}
-        onChange={(e) =>
-          onFieldChange("section4", e.target.name, e.target.value)
-        }
+        onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
       />
       <Box sx={{ marginTop: 2 }}>

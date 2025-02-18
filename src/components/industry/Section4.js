@@ -15,9 +15,7 @@ const Section4 = ({ formData, onFieldChange }) => {
             label="Heading"
             name="heading"
             value={formData.heading}
-            onChange={(e) =>
-              onFieldChange("section4", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>
@@ -33,11 +31,7 @@ const Section4 = ({ formData, onFieldChange }) => {
                 name={`components[${index}].title`}
                 value={component.title}
                 onChange={(e) =>
-                  onFieldChange(
-                    `section4.components[${index}]`,
-                    "title",
-                    e.target.value
-                  )
+                  onFieldChange(`components[${index}]`, "title", e.target.value)
                 }
                 variant="outlined"
               />
@@ -50,7 +44,7 @@ const Section4 = ({ formData, onFieldChange }) => {
                 value={component.imageUrl}
                 onChange={(e) =>
                   onFieldChange(
-                    `section4.components[${index}]`,
+                    `components[${index}]`,
                     "imageUrl",
                     e.target.value
                   )

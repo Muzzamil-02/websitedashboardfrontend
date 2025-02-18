@@ -15,9 +15,7 @@ const Section8 = ({ formData, onFieldChange }) => {
             label="Image URL"
             name="imageUrl"
             value={formData.imageUrl}
-            onChange={(e) =>
-              onFieldChange("section8", e.target.name, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
         </Grid>

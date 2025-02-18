@@ -1,120 +1,96 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  Container,
-  Paper,
-  Box,
-  Button,
-  Tabs,
-  Tab,
-  IconButton,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import React, { useEffect, useState } from "react";
+import { Container, Paper, Button, Box, Tabs, Tab } from "@mui/material";
+import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
-import NewsSection from "@/components/press/Section1";
+import { homeEditData, homeGetData } from "@/services/news/service.js";
+import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
+import section1 from "@/components/press/Section1";
 
 const sectionComponents = {
-  section1: NewsSection,
+  section1,
 };
 
-const initialFormData = {
-  English: {
-    section1: {
-      title: "",
-      articles: [
-        {
-          image: "",
-          title: "",
-          description: "",
-          category: "",
-          categoryLink: "",
-          date: "",
-        },
-      ],
-    },
-  },
-};
+export default function Home() {
+  const [languages] = useState([
+    { label: "English", code: "en" },
+    { label: "Finnish", code: "fn" },
+    { label: "Arabic", code: "ar" },
+  ]);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [initialValues, setInitialValues] = useState({});
 
-export default function NewsPage() {
-  const [languages, setLanguages] = useState(["English"]);
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
-  const [formData, setFormData] = useState(initialFormData);
+  useEffect(() => {
+    homeGetData(selectedLanguage)
+      .then((data) => {
+        if (data) {
+          setInitialValues(JsonFormatter(data));
+        }
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, [selectedLanguage]);
 
-  const handleLanguageChange = (event, newValue) => {
-    setSelectedLanguage(newValue);
-  };
-
-  const handleAddLanguage = () => {
-    const newLanguage = prompt("Enter new language name:");
-    if (newLanguage && !languages.includes(newLanguage)) {
-      setLanguages([...languages, newLanguage]);
-      setFormData({
-        ...formData,
-        [newLanguage]: {
-          section1: { title: "", articles: [] },
-        },
-      });
-    }
-  };
-
-  const handleFieldChange = (section, name, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [selectedLanguage]: {
-        ...prevData[selectedLanguage],
-        [section]: { ...prevData[selectedLanguage][section], [name]: value },
-      },
-    }));
-  };
-
-  const handleSaveChanges = () => {
-    console.log("Form Data Submitted:", formData);
+  const handleSaveChanges = (values) => {
+    console.log("Form Data Submitted:", values);
     alert("Form submitted! Check console for data.");
+    const formattedData = JsonToSLugFormatter(values);
+    homeEditData(formattedData, selectedLanguage);
   };
-
+  console.log("initialValues", initialValues);
   return (
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fc" }}>
       <Sidebar />
       <Container sx={{ flexGrow: 1, padding: 3 }}>
         <Tabs
           value={selectedLanguage}
-          onChange={handleLanguageChange}
+          onChange={(event, newValue) => setSelectedLanguage(newValue)}
           variant="scrollable"
           scrollButtons="auto"
         >
           {languages.map((lang) => (
-            <Tab key={lang} label={lang} value={lang} />
+            <Tab key={lang.code} label={lang.label} value={lang.code} />
           ))}
-          <IconButton onClick={handleAddLanguage}>
-            <AddIcon />
-          </IconButton>
         </Tabs>
 
-        <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
-          {Object.keys(formData[selectedLanguage] || {}).map((section) => {
-            const Component = sectionComponents[section];
-            return Component ? (
-              <Box key={section} sx={{ marginBottom: 2 }}>
-                <Component
-                  formData={formData[selectedLanguage][section]}
-                  onFieldChange={handleFieldChange}
-                />
-              </Box>
-            ) : null;
-          })}
+        <Formik
+          initialValues={initialValues}
+          enableReinitialize
+          onSubmit={handleSaveChanges}
+        >
+          {({ values, handleBlur, setFieldValue }) => (
+            <Form>
+              <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
+                {Object.keys(values || {}).map((section) => {
+                  const Component = sectionComponents[section];
 
-          <Box textAlign="center" sx={{ marginTop: 3 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ padding: "10px 20px", fontSize: "16px" }}
-              onClick={handleSaveChanges}
-            >
-              Save Changes
-            </Button>
-          </Box>
-        </Paper>
+                  return Component ? (
+                    <Box key={section} sx={{ marginBottom: 2 }}>
+                      <Component
+                        formData={values.section1 || { articles: [] }}
+                        onFieldChange={(field, value) =>
+                          setFieldValue(`section1.${field}`, value)
+                        }
+                        onBlur={handleBlur}
+                      />
+                    </Box>
+                  ) : null;
+                })}
+
+                <Box textAlign="center" sx={{ marginTop: 3 }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    sx={{ padding: "10px 20px", fontSize: "16px" }}
+                  >
+                    Save Changes
+                  </Button>
+                </Box>
+              </Paper>
+            </Form>
+          )}
+        </Formik>
       </Container>
     </Box>
   );

@@ -5,7 +5,7 @@ const Section1 = ({ formData, onFieldChange }) => {
   const handleArticleChange = (index, field, value) => {
     const updatedArticles = [...formData.articles];
     updatedArticles[index] = { ...updatedArticles[index], [field]: value };
-    onFieldChange("section1", "articles", updatedArticles);
+    onFieldChange("articles", updatedArticles);
   };
 
   const handleAddNewArticle = () => {
@@ -17,7 +17,8 @@ const Section1 = ({ formData, onFieldChange }) => {
       categoryLink: "",
       date: "",
     };
-    onFieldChange("section1", "articles", [...formData.articles, newArticle]);
+
+    onFieldChange("articles", [...(formData?.articles || []), newArticle]);
   };
 
   return (
@@ -28,7 +29,7 @@ const Section1 = ({ formData, onFieldChange }) => {
         fullWidth
         label="Title"
         value={formData.title || ""}
-        onChange={(e) => onFieldChange("section1", "title", e.target.value)}
+        onChange={(e) => onFieldChange("title", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />

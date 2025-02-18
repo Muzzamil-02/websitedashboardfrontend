@@ -21,7 +21,7 @@ const Section7 = ({ formData, onFieldChange }) => {
               value={component.description}
               onChange={(e) =>
                 onFieldChange(
-                  `section7.component[${index}]`,
+                  `component[${index}]`,
                   "description",
                   e.target.value
                 )
@@ -36,11 +36,7 @@ const Section7 = ({ formData, onFieldChange }) => {
               name={`component[${index}].logoURL`}
               value={component.logoURL}
               onChange={(e) =>
-                onFieldChange(
-                  `section7.component[${index}]`,
-                  "logoURL",
-                  e.target.value
-                )
+                onFieldChange(`component[${index}]`, "logoURL", e.target.value)
               }
               variant="outlined"
             />

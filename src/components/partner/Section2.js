@@ -15,9 +15,7 @@ const Section2 = ({ formData, onFieldChange }) => {
         rows={4}
         name="Text"
         value={formData.Text}
-        onChange={(e) =>
-          onFieldChange("section2", e.target.name, e.target.value)
-        }
+        onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
       />
     </div>

@@ -14,9 +14,7 @@ const KeyStakeholderSlider = ({ formData, onFieldChange }) => {
         label="Heading"
         name="heading"
         value={formData.heading}
-        onChange={(e) =>
-          onFieldChange("keyskaeholderslider", "heading", e.target.value)
-        }
+        onChange={(e) => onFieldChange("heading", e.target.value)}
         variant="outlined"
         sx={{ marginBottom: 2 }}
       />
@@ -30,12 +28,7 @@ const KeyStakeholderSlider = ({ formData, onFieldChange }) => {
               name={`components[${index}].title`}
               value={component.title}
               onChange={(e) =>
-                onFieldChange(
-                  "keyskaeholderslider",
-                  `components[${index}]`,
-                  "title",
-                  e.target.value
-                )
+                onFieldChange(`components[${index}]`, "title", e.target.value)
               }
               variant="outlined"
             />
@@ -49,7 +42,6 @@ const KeyStakeholderSlider = ({ formData, onFieldChange }) => {
               value={component.description}
               onChange={(e) =>
                 onFieldChange(
-                  "keyskaeholderslider",
                   `components[${index}]`,
                   "description",
                   e.target.value
@@ -67,7 +59,6 @@ const KeyStakeholderSlider = ({ formData, onFieldChange }) => {
               value={component.imageUrl}
               onChange={(e) =>
                 onFieldChange(
-                  "keyskaeholderslider",
                   `components[${index}]`,
                   "imageUrl",
                   e.target.value
