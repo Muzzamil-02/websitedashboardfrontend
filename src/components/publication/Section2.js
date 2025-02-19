@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
-const Section2 = ({ formData, onFieldChange }) => {
+const Section2 = ({ formData, onFieldChange, slug }) => {
   // const handleListChange = (index, field, value) => {
   //   const updatedList = [...formData.list];
   //   updatedList[index] = { ...updatedList[index], [field]: value };
@@ -23,7 +23,9 @@ const Section2 = ({ formData, onFieldChange }) => {
 
   return (
     <Box>
-      <Typography variant="h6">Section 2 - Whitepapers & Reports</Typography>
+      <Typography variant="h5" gutterBottom>
+        {slug}
+      </Typography>
 
       {formData.sections?.map((item, index) => (
         <Box

@@ -69,6 +69,7 @@ export default function Home() {
                   return Component ? (
                     <Box key={section} sx={{ marginBottom: 2 }}>
                       <Component
+                        slug={section}
                         formData={values[section]}
                         onFieldChange={(field, value) =>
                           setFieldValue(`${section}.${field}`, value)

@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
-const Section1 = ({ formData, onFieldChange }) => {
+const Section1 = ({ formData, onFieldChange, slug }) => {
   const handleArticleChange = (index, field, value) => {
     const updatedArticles = [...formData.articles];
     updatedArticles[index] = { ...updatedArticles[index], [field]: value };
@@ -23,7 +23,9 @@ const Section1 = ({ formData, onFieldChange }) => {
 
   return (
     <Box>
-      <Typography variant="h6">News and Press Releases</Typography>
+      <Typography variant="h5" gutterBottom>
+        {slug}
+      </Typography>
 
       <TextField
         fullWidth

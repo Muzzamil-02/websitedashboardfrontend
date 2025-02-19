@@ -3,12 +3,12 @@
 import { Grid, TextField, Typography, Box, Paper } from "@mui/material";
 import parse from "html-react-parser"; // Install this package to parse HTML
 
-const Section10 = ({ formData, onFieldChange }) => {
+const Section10 = ({ formData, onFieldChange, slug }) => {
   return (
     <Box sx={{ marginTop: 4 }}>
       {/* Main Heading */}
       <Typography variant="h5" gutterBottom>
-        section10
+        {slug}
       </Typography>
 
       {/* Main Heading Input */}

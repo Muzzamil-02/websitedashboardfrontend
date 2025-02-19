@@ -12,7 +12,7 @@ import {
   Box,
 } from "@mui/material";
 
-const Section2 = ({ formData, onFieldChange }) => {
+const Section2 = ({ formData, onFieldChange, slug }) => {
   console.log("formdat", formData);
   const handleAddArticle = () => {
     console.log("in");
@@ -27,6 +27,9 @@ const Section2 = ({ formData, onFieldChange }) => {
   };
   return (
     <>
+      <Typography variant="h5" gutterBottom>
+        {slug}
+      </Typography>
       <Grid container spacing={2}>
         {formData.sections.map((event, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>

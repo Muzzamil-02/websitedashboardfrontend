@@ -3,11 +3,11 @@
 import React from "react";
 import { Grid, TextField, Typography, Button, Box } from "@mui/material";
 
-const KeyStakeholderSlider = ({ formData, onFieldChange }) => {
+const KeyStakeholderSlider = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        KeyStakeholderSlider
+        {slug}
       </Typography>
       <TextField
         fullWidth

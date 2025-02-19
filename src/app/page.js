@@ -17,7 +17,11 @@ import Section8 from "@/components/home/Section8";
 import Section9 from "@/components/home/Section9";
 import Section10 from "@/components/home/Section10";
 import Section13 from "@/components/home/Section13";
-import ScreenData from "@/components/home/ScreenData";
+import screendata from "@/components/home/ScreenData";
+import globalPresence from "@/components/home/GlobalPresence";
+import ServiceCard from "@/components/home/ServiceCard";
+import FaceCardSection from "@/components/home/FaceCardSection";
+import newteamsection from "@/components/home/NewTeamSection";
 
 const sectionComponents = {
   Section1,
@@ -31,7 +35,11 @@ const sectionComponents = {
   Section9,
   Section10,
   Section13,
-  ScreenData,
+  screendata,
+  globalPresence,
+  ServiceCard,
+  FaceCardSection,
+  newteamsection,
 };
 
 export default function Home() {
@@ -89,6 +97,7 @@ export default function Home() {
                   return Component ? (
                     <Box key={section} sx={{ marginBottom: 2 }}>
                       <Component
+                        slug={section}
                         formData={values[section]}
                         onFieldChange={(field, value) =>
                           setFieldValue(`${section}.${field}`, value)

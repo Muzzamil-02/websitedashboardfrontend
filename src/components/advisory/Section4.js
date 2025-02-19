@@ -2,7 +2,7 @@
 
 import { Grid, TextField, Typography } from "@mui/material";
 
-const Section4 = ({ formData, onFieldChange }) => {
+const Section4 = ({ formData, onFieldChange, slug }) => {
   if (!formData || Object.keys(formData).length === 0) {
     return <Typography variant="h6">No Data Available</Typography>;
   }
@@ -10,7 +10,7 @@ const Section4 = ({ formData, onFieldChange }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        Section4
+        {slug}
       </Typography>
       <Grid container spacing={2}>
         {Object.entries(formData).map(([key, service], index) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
-const Section2 = ({ formData, onFieldChange }) => {
+const Section2 = ({ formData, onFieldChange, slug }) => {
   const handleAddArticle = () => {
     console.log("in");
     const newArticle = {
@@ -17,6 +17,9 @@ const Section2 = ({ formData, onFieldChange }) => {
 
   return (
     <div>
+      <Typography variant="h5" gutterBottom>
+        {slug}
+      </Typography>
       {/* Title */}
       <TextField
         fullWidth

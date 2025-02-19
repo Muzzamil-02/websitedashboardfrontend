@@ -3,12 +3,12 @@
 import { Grid, TextField, Typography, Box, Paper } from "@mui/material";
 import parse from "html-react-parser"; // Install this package to parse HTML
 
-const Section6 = ({ formData, onFieldChange }) => {
+const Section6 = ({ formData, onFieldChange, slug }) => {
   return (
     <Box sx={{ marginTop: 4 }}>
       {/* Section 6 Main Heading */}
       <Typography variant="h5" gutterBottom>
-        Section6
+        {slug}
       </Typography>
 
       <Grid container spacing={2}>

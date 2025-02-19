@@ -3,11 +3,11 @@
 import React from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
 
-const Section4 = ({ formData, onFieldChange }) => {
+const Section4 = ({ formData, onFieldChange, slug }) => {
   return (
     <Box sx={{ padding: 2 }}>
       <Typography variant="h5" gutterBottom>
-        section4
+        {slug}
       </Typography>
       <TextField
         fullWidth

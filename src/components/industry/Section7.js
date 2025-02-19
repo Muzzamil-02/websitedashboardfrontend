@@ -2,11 +2,11 @@
 
 import { Grid, TextField, Typography } from "@mui/material";
 
-const Section7 = ({ formData, onFieldChange }) => {
+const Section7 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        Section 7
+        {slug}
       </Typography>
       {formData.component?.map((component, index) => (
         <Grid container spacing={2} key={index} sx={{ marginBottom: 2 }}>

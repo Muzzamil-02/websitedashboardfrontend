@@ -6,10 +6,10 @@ import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
 import { homeEditData, homeGetData } from "@/services/insightdetail/service.js";
 import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
-import page1 from "@/components/insightdetail/Section1";
+import insightdetail from "@/components/insightdetail/Section1";
 
 const sectionComponents = {
-  page1,
+  insightdetail,
 };
 
 export default function Home() {
@@ -67,6 +67,7 @@ export default function Home() {
                   return Component ? (
                     <Box key={section} sx={{ marginBottom: 2 }}>
                       <Component
+                        slug={section}
                         formData={values[section]}
                         onFieldChange={(field, value) =>
                           setFieldValue(`${section}.${field}`, value)

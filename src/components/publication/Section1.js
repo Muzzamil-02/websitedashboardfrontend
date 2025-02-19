@@ -1,10 +1,12 @@
 import React from "react";
 import { TextField, Box, Typography } from "@mui/material";
 
-const Section1 = ({ formData, onFieldChange }) => {
+const Section1 = ({ formData, onFieldChange, slug }) => {
   return (
     <Box>
-      <Typography variant="h6">Section 1 - Research & Publications</Typography>
+      <Typography variant="h5" gutterBottom>
+        {slug}
+      </Typography>
 
       <TextField
         fullWidth

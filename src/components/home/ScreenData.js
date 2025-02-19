@@ -2,11 +2,12 @@
 
 import { Grid, TextField, Typography, Box, Paper } from "@mui/material";
 
-const ScreenData = ({ formData, onFieldChange }) => {
+const ScreenData = ({ formData, onFieldChange, slug }) => {
+  console.log("screendata", formData);
   return (
     <Box sx={{ marginTop: 4 }}>
       <Typography variant="h5" gutterBottom>
-        Screen Data - ESG Transition Steps
+        {slug}
       </Typography>
 
       {/* Image URL Field */}

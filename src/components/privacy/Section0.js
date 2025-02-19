@@ -1,12 +1,12 @@
 import React from "react";
 import { TextField, Grid, Typography } from "@mui/material";
 
-const Section0 = ({ formData, onFieldChange }) => {
+const Section0 = ({ formData, onFieldChange, slug }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Typography variant="h5" gutterBottom>
-          section0
+          {slug}
         </Typography>
         <TextField
           fullWidth

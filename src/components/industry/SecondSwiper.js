@@ -3,11 +3,11 @@
 import React from "react";
 import { Grid, TextField, Typography, Box } from "@mui/material";
 
-const SecondSwiper = ({ formData, onFieldChange }) => {
+const SecondSwiper = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        Second Swiper
+        {slug}
       </Typography>
 
       {/* Main Heading */}

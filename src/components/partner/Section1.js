@@ -3,11 +3,11 @@
 import React from "react";
 import { Grid, TextField, Typography } from "@mui/material";
 
-const Section1 = ({ formData, onFieldChange }) => {
+const Section1 = ({ formData, onFieldChange, slug }) => {
   return (
     <Grid container spacing={2}>
       <Typography variant="h5" gutterBottom>
-        section1
+        {slug}
       </Typography>
       <Grid item xs={12}>
         <TextField

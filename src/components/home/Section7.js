@@ -3,13 +3,13 @@
 import { Grid, TextField, Typography, Box, Paper } from "@mui/material";
 import Image from "next/image";
 
-const Section7 = ({ formData, onFieldChange }) => {
+const Section7 = ({ formData, onFieldChange, slug }) => {
   console.log("form", formData);
   return (
     <Box sx={{ marginTop: 4 }}>
       {/* Section Heading */}
       <Typography variant="h5" gutterBottom>
-        Section7
+        {slug}
       </Typography>
 
       {/* Heading Input */}

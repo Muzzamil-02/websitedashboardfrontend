@@ -2,11 +2,11 @@
 
 import { Grid, TextField, Typography } from "@mui/material";
 
-const Section6 = ({ formData, onFieldChange }) => {
+const Section6 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        Section 6
+        {slug}
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
