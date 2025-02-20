@@ -18,7 +18,16 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
           return (
             <Grid container spacing={2} key={index} sx={{ marginBottom: 2 }}>
               <Grid item xs={12}>
-                <Typography variant="h6">{service.title}</Typography>
+                <TextField
+                  fullWidth
+                  label="Titlle"
+                  name={`${key}.title`}
+                  value={service.title || ""}
+                  onChange={(e) =>
+                    onFieldChange(`${key}.title`, e.target.value)
+                  }
+                  variant="outlined"
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -27,11 +36,7 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
                   name={`${key}.description`}
                   value={service.description || ""}
                   onChange={(e) =>
-                    onFieldChange(
-                      `section4.${key}`,
-                      "description",
-                      e.target.value
-                    )
+                    onFieldChange(`${key}.description`, e.target.value)
                   }
                   variant="outlined"
                 />
@@ -42,9 +47,7 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
                   label="Icon URL"
                   name={`${key}.icon`}
                   value={service.icon || ""}
-                  onChange={(e) =>
-                    onFieldChange(`section4.${key}`, "icon", e.target.value)
-                  }
+                  onChange={(e) => onFieldChange(`${key}.icon`, e.target.value)}
                   variant="outlined"
                 />
               </Grid>
@@ -55,7 +58,7 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
                   name={`${key}.image`}
                   value={service.image || ""}
                   onChange={(e) =>
-                    onFieldChange(`section4.${key}`, "image", e.target.value)
+                    onFieldChange(`${key}.image`, e.target.value)
                   }
                   variant="outlined"
                 />
@@ -70,11 +73,7 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
                       name={`${key}.service[${idx}]`}
                       value={point || ""}
                       onChange={(e) =>
-                        onFieldChange(
-                          `section4.${key}.service`,
-                          idx,
-                          e.target.value
-                        )
+                        onFieldChange(`${key}.service`, idx, e.target.value)
                       }
                       variant="outlined"
                     />

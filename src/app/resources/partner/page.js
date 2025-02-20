@@ -88,8 +88,11 @@ export default function Home() {
                   <Button
                     type="submit"
                     variant="contained"
-                    color="primary"
-                    sx={{ padding: "10px 20px", fontSize: "16px" }}
+                    sx={{
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                      background: "#d30c0b",
+                    }}
                   >
                     Save Changes
                   </Button>

@@ -93,10 +93,14 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
         ))}
       </Grid>
       {/* Add Article Button */}
-      <Box textAlign="center">
-        <Box textAlign="center">
-          <Button variant="contained" onClick={handleAddArticle}>
-            Add New Article
+      <Box textAlign="right">
+        <Box textAlign="right">
+          <Button
+            variant="contained"
+            onClick={handleAddArticle}
+            sx={{ background: "#d30c0b" }}
+          >
+            Add +
           </Button>
         </Box>
       </Box>

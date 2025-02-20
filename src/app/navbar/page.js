@@ -4,17 +4,19 @@ import React, { useEffect, useState } from "react";
 import { Container, Paper, Button, Box, Tabs, Tab } from "@mui/material";
 import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
-import { homeEditData, homeGetData } from "@/services/events/service.js";
+import { homeEditData, homeGetData } from "@/services/navbar/service.js";
 import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
-// import Section1 from "@/components/events/Section1";
-import list from "@/components/events/Section2";
+import main from "@/components/navbar/Section1";
+import resources from "@/components/navbar/Section2";
+import industry from "@/components/navbar/Section3";
 
 const sectionComponents = {
-  // Section1,
-  list,
+  main,
+  resources,
+  industry,
 };
 
-export default function Home() {
+export default function page() {
   const [languages] = useState([
     { label: "English", code: "en" },
     { label: "Finnish", code: "fn" },
@@ -41,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <Box sx={{ display: "flex", backgroundColor: "#f8f9fc" }}>
+    <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fc" }}>
       <Sidebar />
       <Container sx={{ flexGrow: 1, padding: 3 }}>
         <Tabs

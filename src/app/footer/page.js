@@ -1,37 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Paper,
-  Button,
-  Box,
-  Tabs,
-  Tab,
-  Typography,
-} from "@mui/material";
+import { Container, Paper, Button, Box, Tabs, Tab } from "@mui/material";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import Sidebar from "@/components/Sidebar";
-import section1 from "@/components/about/Section1";
-import section2 from "@/components/about/Section2";
-import section3 from "@/components/about/Section3";
-import section4 from "@/components/about/Section4";
-import section5 from "@/components/about/Section5";
-
-import { homeEditData, homeGetData } from "@/services/about/service.js";
+import { homeEditData, homeGetData } from "@/services/footer/service.js";
 import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
-import ScreenData from "@/components/home/ScreenData";
+import data from "@/components/footer/Section1";
 
 const sectionComponents = {
-  section1,
-  section2,
-  section3,
-  section4,
-  section5,
+  data,
 };
 
-export default function About() {
+export default function Home() {
   const [languages] = useState([
     { label: "English", code: "en" },
     { label: "Finnish", code: "fn" },

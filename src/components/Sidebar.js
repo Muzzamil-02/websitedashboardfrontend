@@ -8,12 +8,14 @@ import {
   ListItemText,
   Drawer,
   Collapse,
+  Box,
 } from "@mui/material";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // import WorkIcon from "@mui/icons-material/Work";
 import { useState } from "react";
+import Link from "next/link";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -101,6 +103,18 @@ const Sidebar = () => {
 
       path: "policy",
     },
+    {
+      id: 24,
+      text: "Navbar",
+
+      path: "navbar",
+    },
+    {
+      id: 25,
+      text: "Footer",
+
+      path: "footer",
+    },
   ];
 
   return (
@@ -117,6 +131,16 @@ const Sidebar = () => {
         },
       }}
     >
+      <Box sx={{ textAlign: "center", padding: "20px" }}>
+        <Link href="/">
+          {" "}
+          <img
+            src="https://fi.spectreco.com/images/logo.png"
+            alt="Logo"
+            style={{ width: "150px", height: "auto" }}
+          />
+        </Link>
+      </Box>
       <List>
         {menuItems.map((item) => (
           <div key={item.id}>

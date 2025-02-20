@@ -114,9 +114,17 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
         </Box>
       ))}
 
-      <Button variant="contained" onClick={handleAddNewArticle}>
-        Add New Article
-      </Button>
+      <Box textAlign="right">
+        <Box textAlign="right">
+          <Button
+            variant="contained"
+            onClick={handleAddNewArticle}
+            sx={{ background: "#d30c0b" }}
+          >
+            Add +
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 };
