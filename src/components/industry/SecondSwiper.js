@@ -4,6 +4,7 @@ import React from "react";
 import { Grid, TextField, Typography, Box } from "@mui/material";
 
 const SecondSwiper = ({ formData, onFieldChange, slug }) => {
+  console.log("swiper");
   return (
     <>
       <Typography variant="h5" gutterBottom>

@@ -35,11 +35,11 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
         onChange={(e) => onFieldChange(e.target.name, e.target.value)}
         variant="outlined"
       />
-      <Box sx={{ marginTop: 2 }}>
-        <Button variant="contained" color="primary">
+      {/* <Box sx={{ marginTop: 2 }}>
+        <Button variant="contained" sx={{ background: "#d30c0b" }}>
           Save
         </Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

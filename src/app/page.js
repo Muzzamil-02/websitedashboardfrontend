@@ -107,7 +107,7 @@ export default function Home() {
               height: "80vh",
             }}
           >
-            <CircularProgress size={60} />
+            <CircularProgress size={60} sx={{ color: "#d30c0b" }} />
           </Box>
         ) : (
           <Formik

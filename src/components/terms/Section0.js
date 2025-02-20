@@ -11,9 +11,9 @@ const Section0 = ({ formData, onFieldChange, slug }) => {
         <TextField
           fullWidth
           label="Main Heading"
-          name="mainheading"
-          value={formData.heading}
-          onChange={(e) => onFieldChange("mainheading", e.target.value)}
+          name="mainHeading"
+          value={formData.mainHeading}
+          onChange={(e) => onFieldChange("mainHeading", e.target.value)}
           variant="outlined"
           sx={{ marginBottom: 2 }}
         />

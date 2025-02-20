@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Container, Paper, Button, Box, Tabs, Tab } from "@mui/material";
+import {
+  Container,
+  Paper,
+  Button,
+  Box,
+  Tabs,
+  Tab,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
 import { homeEditData, homeGetData } from "@/services/navbar/service.js";
@@ -20,24 +29,30 @@ export default function page() {
   const [languages] = useState([
     { label: "English", code: "en" },
     { label: "Finnish", code: "fn" },
-    { label: "Arabic", code: "ar" },
   ]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [initialValues, setInitialValues] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    homeGetData(selectedLanguage)
-      .then((data) => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const data = await homeGetData(selectedLanguage);
         if (data) {
           setInitialValues(JsonFormatter(data));
         }
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [selectedLanguage]);
 
   const handleSaveChanges = (values) => {
-    console.log("Form Data Submitted:", values);
-    alert("Form submitted! Check console for data.");
     const formattedData = JsonToSLugFormatter(values);
     homeEditData(formattedData, selectedLanguage);
   };
@@ -57,48 +72,65 @@ export default function page() {
           ))}
         </Tabs>
 
-        <Formik
-          initialValues={initialValues}
-          enableReinitialize
-          onSubmit={handleSaveChanges}
-        >
-          {({ values, handleBlur, setFieldValue }) => (
-            <Form>
-              <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
-                {Object.keys(values || {}).map((section) => {
-                  const Component = sectionComponents[section];
-
-                  return Component ? (
-                    <Box key={section} sx={{ marginBottom: 2 }}>
-                      <Component
-                        slug={section}
-                        formData={values[section]}
-                        onFieldChange={(field, value) =>
-                          setFieldValue(`${section}.${field}`, value)
-                        }
-                        onBlur={handleBlur}
-                      />
-                    </Box>
-                  ) : null;
-                })}
-
-                <Box textAlign="center" sx={{ marginTop: 3 }}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                      padding: "10px 20px",
-                      fontSize: "16px",
-                      background: "#d30c0b",
-                    }}
-                  >
-                    Save Changes
-                  </Button>
-                </Box>
-              </Paper>
-            </Form>
-          )}
-        </Formik>
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "80vh",
+            }}
+          >
+            <CircularProgress size={60} sx={{ color: "#d30c0b" }} />
+          </Box>
+        ) : (
+          <Formik
+            initialValues={initialValues}
+            enableReinitialize
+            onSubmit={handleSaveChanges}
+          >
+            {({ values, handleBlur, setFieldValue }) => (
+              <Form>
+                <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
+                  <Box sx={{ textAlign: "center", paddingBottom: 3 }}>
+                    <Typography variant="h4" gutterBottom>
+                      Navbar Page Sections
+                    </Typography>
+                  </Box>
+                  {Object.keys(values || {}).map((section) => {
+                    const Component = sectionComponents[section];
+                    return Component ? (
+                      <Box key={section} sx={{ marginBottom: 2 }}>
+                        <Component
+                          slug={section}
+                          formData={values[section]}
+                          onFieldChange={(field, value) =>
+                            setFieldValue(`${section}.${field}`, value)
+                          }
+                          onBlur={handleBlur}
+                        />
+                      </Box>
+                    ) : null;
+                  })}
+                  <Box textAlign="center" sx={{ marginTop: 3 }}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      sx={{
+                        padding: "10px 20px",
+                        fontSize: "16px",
+                        background: "#d30c0b",
+                        "&:hover": { background: "#a90a0a" },
+                      }}
+                    >
+                      Save Changes
+                    </Button>
+                  </Box>
+                </Paper>
+              </Form>
+            )}
+          </Formik>
+        )}
       </Container>
     </Box>
   );

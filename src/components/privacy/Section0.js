@@ -11,14 +11,14 @@ const Section0 = ({ formData, onFieldChange, slug }) => {
         <TextField
           fullWidth
           label="Main Heading"
-          name="mainheading"
-          value={formData.heading}
-          onChange={(e) => onFieldChange("mainheading", e.target.value)}
+          name="mainHeading"
+          value={formData.mainHeading}
+          onChange={(e) => onFieldChange("mainHeading", e.target.value)}
           variant="outlined"
           sx={{ marginBottom: 2 }}
         />
       </Grid>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <TextField
           fullWidth
           label="Description"
@@ -27,7 +27,7 @@ const Section0 = ({ formData, onFieldChange, slug }) => {
           onChange={(e) => onFieldChange(e.target.name, e.target.value)}
           variant="outlined"
         />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

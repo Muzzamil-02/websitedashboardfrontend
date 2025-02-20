@@ -21,18 +21,36 @@ const Section3 = ({ formData, onFieldChange, slug }) => {
       </Grid>
       {formData.components.map((component, index) => (
         <Grid key={index} item xs={12}>
-          <Typography variant="h6">{component.title}</Typography>
           <TextField
             fullWidth
-            label="Description"
+            label="Title"
+            name={`components[${index}].title`}
+            value={component.title}
+            onChange={(e) =>
+              onFieldChange(`components[${index}].title`, e.target.value)
+            }
+            variant="outlined"
+            multiline
+          />
+          <TextField
+            fullWidth
+            label="Text"
             name={`components[${index}].text`}
             value={component.text}
             onChange={(e) =>
               onFieldChange(`components[${index}].text`, e.target.value)
             }
             variant="outlined"
-            multiline
-            rows={4}
+          />
+          <TextField
+            fullWidth
+            label="ImageUrl"
+            name={`components[${index}].imageUrl`}
+            value={component.imageUrl}
+            onChange={(e) =>
+              onFieldChange(`components[${index}].imageUrl`, e.target.value)
+            }
+            variant="outlined"
           />
         </Grid>
       ))}

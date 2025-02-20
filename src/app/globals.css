@@ -40,3 +40,41 @@ a {
     color-scheme: dark;
   }
 }
+/* Formik TextField outline styles */
+.MuiFormControl-root .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: #000;
+}
+
+
+
+.MuiFormControl-root .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #d30c0b;
+}
+
+
+
+/* Label styles */
+.MuiFormLabel-root {
+  color: #000;
+}
+
+.MuiFormLabel-root.Mui-focused {
+  color: #d30c0b;
+}
+/* Tabs indicator */
+.MuiTabs-indicator {
+  background-color: #d30c0b !important;
+}
+
+/* Tab text colors */
+.MuiTab-root {
+  color: #000 !important;
+}
+
+.MuiTab-root.Mui-selected {
+  color: #d30c0b !important;
+}
+
+.MuiTab-root:hover {
+  color: #d30c0b !important;
+}

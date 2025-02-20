@@ -33,8 +33,8 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
           <TextField
             fullWidth
             label="Heading"
-            name="heading"
-            value={formData.heading}
+            name="Heading"
+            value={formData.Heading}
             onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />
@@ -43,8 +43,8 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
           <TextField
             fullWidth
             label="Text"
-            name="text"
-            value={formData.text}
+            name="Text"
+            value={formData.Text}
             onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
           />

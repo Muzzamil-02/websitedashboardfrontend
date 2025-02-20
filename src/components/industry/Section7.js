@@ -11,7 +11,16 @@ const Section7 = ({ formData, onFieldChange, slug }) => {
       {formData.component?.map((component, index) => (
         <Grid container spacing={2} key={index} sx={{ marginBottom: 2 }}>
           <Grid item xs={12}>
-            <Typography variant="h6">{component.title}</Typography>
+            <TextField
+              fullWidth
+              label="title"
+              name={`component[${index}].title`}
+              value={component.title}
+              onChange={(e) =>
+                onFieldChange(`component[${index}]`, "title", e.target.value)
+              }
+              variant="outlined"
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField

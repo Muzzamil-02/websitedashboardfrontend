@@ -9,6 +9,8 @@ import {
   Tabs,
   Tab,
   Typography,
+  CircularProgress,
+  colors,
 } from "@mui/material";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -87,7 +89,7 @@ export default function About() {
               height: "80vh",
             }}
           >
-            <CircularProgress size={60} />
+            <CircularProgress size={60} sx={{ color: "#d30c0b" }} />
           </Box>
         ) : (
           <Formik
@@ -100,7 +102,7 @@ export default function About() {
                 <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
                   <Box sx={{ textAlign: "center", paddingBottom: 3 }}>
                     <Typography variant="h4" gutterBottom>
-                      Home Page Sections
+                      About Page Sections
                     </Typography>
                   </Box>
                   {Object.keys(values || {}).map((section) => {

@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Container, Paper, Button, Box, Tabs, Tab } from "@mui/material";
+import {
+  Container,
+  Paper,
+  Button,
+  Box,
+  Tabs,
+  Tab,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
 import { homeEditData, homeGetData } from "@/services/advisory/service.js";
@@ -74,7 +83,7 @@ export default function Home() {
               height: "80vh",
             }}
           >
-            <CircularProgress size={60} />
+            <CircularProgress size={60} sx={{ color: "#d30c0b" }} />
           </Box>
         ) : (
           <Formik
@@ -87,7 +96,7 @@ export default function Home() {
                 <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
                   <Box sx={{ textAlign: "center", paddingBottom: 3 }}>
                     <Typography variant="h4" gutterBottom>
-                      Home Page Sections
+                      Advisory Page Sections
                     </Typography>
                   </Box>
                   {Object.keys(values || {}).map((section) => {

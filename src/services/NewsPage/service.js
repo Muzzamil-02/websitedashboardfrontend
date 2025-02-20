@@ -20,3 +20,12 @@ export const homeGetData = async (lang) => {
     console.error(`Error fetching data for language ${lang}:`, error);
   }
 };
+export const articleGetData = async (lang) => {
+  try {
+    const result = await client.get(`/insight-articles`);
+    console.log(`Data fetched successfully for language: ${lang}`);
+    return result.data;
+  } catch (error) {
+    console.error(`Error fetching data for language ${lang}:`, error);
+  }
+};
