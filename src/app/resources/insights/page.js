@@ -14,18 +14,17 @@ import {
 import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
 import {
+  articleEditData,
   articleGetData,
   homeEditData,
   homeGetData,
 } from "@/services/NewsPage/service.js";
 import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
-import section1 from "@/components/NewsPage/Section1";
-// import list from "@/components/NewsPage/Section2";
+import Section1 from "@/components/NewsPage/Section1";
 
-const sectionComponents = {
-  section1,
-  // list,
-};
+// const sectionComponents = {
+//   section1,
+// };
 
 export default function Home() {
   const [languages] = useState([
@@ -33,16 +32,16 @@ export default function Home() {
     { label: "Finnish", code: "fn" },
   ]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
-  const [initialValues, setInitialValues] = useState({});
+  const [initialValues, setInitialValues] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await articleGetData(selectedLanguage);
+        const data = await articleGetData();
         if (data) {
-          setInitialValues(JsonFormatter(data));
+          setInitialValues({ articles: data }); // Set fetched articles here
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -56,7 +55,7 @@ export default function Home() {
 
   const handleSaveChanges = (values) => {
     const formattedData = JsonToSLugFormatter(values);
-    homeEditData(formattedData, selectedLanguage);
+    articleEditData(values?.articles);
   };
   console.log("initial", initialValues);
   return (
@@ -94,26 +93,13 @@ export default function Home() {
             {({ values, handleBlur, setFieldValue }) => (
               <Form>
                 <Paper sx={{ padding: 4, borderRadius: 3, boxShadow: 3 }}>
-                  <Box sx={{ textAlign: "center", paddingBottom: 3 }}>
-                    <Typography variant="h4" gutterBottom>
-                      Blog & Insight Page Sections
-                    </Typography>
-                  </Box>
-                  {Object.keys(values || {}).map((section) => {
-                    const Component = sectionComponents[section];
-                    return Component ? (
-                      <Box key={section} sx={{ marginBottom: 2 }}>
-                        <Component
-                          slug={section}
-                          formData={values[section]}
-                          onFieldChange={(field, value) =>
-                            setFieldValue(`${section}.${field}`, value)
-                          }
-                          onBlur={handleBlur}
-                        />
-                      </Box>
-                    ) : null;
-                  })}
+                  <Section1
+                    formData={values}
+                    onFieldChange={(field, value) =>
+                      setFieldValue(field, value)
+                    }
+                    slug="Section 1"
+                  />
                   <Box textAlign="center" sx={{ marginTop: 3 }}>
                     <Button
                       type="submit"

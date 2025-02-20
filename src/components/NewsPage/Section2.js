@@ -2,6 +2,7 @@ import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
 const Section2 = ({ formData, onFieldChange, slug }) => {
+  console.log("dd", formData);
   const handleAddArticle = () => {
     console.log("in");
     const newArticle = {
@@ -31,7 +32,7 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
       />
 
       {/* Articles */}
-      {formData.articles.map((article, index) => (
+      {formData.map((article, index) => (
         <Box key={index} sx={{ marginBottom: 3 }}>
           {/* Article Image */}
           <TextField

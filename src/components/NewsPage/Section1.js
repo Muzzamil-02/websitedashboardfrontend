@@ -3,7 +3,6 @@ import { TextField, Box, Typography, Button } from "@mui/material";
 
 const Section1 = ({ formData, onFieldChange, slug }) => {
   const handleAddArticle = () => {
-    console.log("in");
     const newArticle = {
       image: "",
       title: "",
@@ -11,8 +10,11 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
       category: "",
       date: "",
     };
-    onFieldChange("articles", [...(formData?.articles || []), newArticle]);
+    // Add the new article to the articles array in Formik state
+    onFieldChange("articles", [...(formData.articles || []), newArticle]);
   };
+
+  console.log("dd", formData);
   return (
     <div>
       <Typography variant="h5" gutterBottom>
@@ -29,9 +31,9 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
       />
 
       {/* Articles */}
+      {/* Articles */}
       {formData.articles.map((article, index) => (
         <Box key={index} sx={{ marginBottom: 3 }}>
-          {/* Article Image */}
           <TextField
             fullWidth
             label={`Image URL for Article ${index + 1}`}
@@ -42,8 +44,6 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 1 }}
           />
-
-          {/* Article Title */}
           <TextField
             fullWidth
             label={`Title for Article ${index + 1}`}
@@ -54,8 +54,6 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 1 }}
           />
-
-          {/* Article Description */}
           <TextField
             fullWidth
             label={`Description for Article ${index + 1}`}
@@ -66,8 +64,6 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 1 }}
           />
-
-          {/* Article Category */}
           <TextField
             fullWidth
             label={`Category for Article ${index + 1}`}
@@ -78,8 +74,6 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 1 }}
           />
-
-          {/* Article Date */}
           <TextField
             fullWidth
             label={`Date for Article ${index + 1}`}
