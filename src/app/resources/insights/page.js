@@ -8,7 +8,6 @@ import {
   Box,
   Tabs,
   Tab,
-  Typography,
   CircularProgress,
 } from "@mui/material";
 import { Formik, Form } from "formik";
@@ -41,8 +40,9 @@ export default function Home() {
       setLoading(true);
       try {
         const data = await articleGetData();
+        console.log("Articles data", data);
         if (data) {
-          setInitialValues({ articles: data }); // Set fetched articles here
+          setInitialValues({ articles: data });
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -55,7 +55,7 @@ export default function Home() {
   }, [selectedLanguage]);
 
   const handleSaveChanges = (values) => {
-    const formattedData = JsonToSLugFormatter(values);
+    console.log("values", values);
     articleEditData(values?.articles);
   };
   console.log("initial", initialValues);

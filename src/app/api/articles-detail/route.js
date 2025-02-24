@@ -16,8 +16,8 @@ export async function POST(request) {
       );
     }
 
-    // Validate article existence first
     const articleIds = details.map((d) => d.article);
+    console.log("Article IDs: ", articleIds);
     const existingArticles = await Article.find({
       _id: { $in: articleIds },
     }).lean();

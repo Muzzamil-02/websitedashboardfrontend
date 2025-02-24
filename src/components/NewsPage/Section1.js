@@ -1,121 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { TextField, Box, Typography, Button, Modal } from "@mui/material";
-import { homeGetData } from "@/services/insightdetail/service";
-import EditArticleModal from "./EditArticleModal";
-
-// const EditArticleModal = ({ open, handleClose, article, onSave }) => {
-//   const [editedArticle, setEditedArticle] = useState(article);
-//   const [initialValues, setInitialValues] = useState([]);
-
-//   const handleChange = (field, value) => {
-//     setEditedArticle({ ...editedArticle, [field]: value });
-//   };
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       if (!article?._id) return; // Ensure _id exists before fetching
-
-//       try {
-//         const data = await homeGetData(article._id); // Pass _id to API
-//         if (data) {
-//           setInitialValues(JsonFormatter(data));
-//         }
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, [article?._id]); // Re-fetch when _id changes
-
-//   return (
-//     <Modal open={open} onClose={handleClose}>
-//       <Box>
-//         <Typography variant="h5" gutterBottom>
-//           Articles
-//         </Typography>
-
-//         {initialValues.map((section, index) => (
-//           <Box
-//             key={index}
-//             sx={{
-//               marginBottom: 3,
-//               padding: 2,
-//               border: "1px solid #ddd",
-//               borderRadius: 2,
-//             }}
-//           >
-//             <Typography variant="subtitle1">Section {index + 1}</Typography>
-
-//             <TextField
-//               fullWidth
-//               label="Main Heading"
-//               value={section.mainHeading || ""}
-//               onChange={(e) =>
-//                 onFieldChange(`sections[${index}].mainHeading`, e.target.value)
-//               }
-//               variant="outlined"
-//               sx={{ marginBottom: 2 }}
-//             />
-
-//             <TextField
-//               fullWidth
-//               label="Date"
-//               value={section.date || ""}
-//               onChange={(e) =>
-//                 onFieldChange(`sections[${index}].date`, e.target.value)
-//               }
-//               variant="outlined"
-//               sx={{ marginBottom: 2 }}
-//             />
-
-//             <TextField
-//               fullWidth
-//               label="Image URL"
-//               value={section.imageURL || ""}
-//               onChange={(e) =>
-//                 onFieldChange(`sections[${index}].imageURL`, e.target.value)
-//               }
-//               variant="outlined"
-//               sx={{ marginBottom: 2 }}
-//             />
-
-//             <TextField
-//               fullWidth
-//               label="Description"
-//               multiline
-//               rows={6}
-//               value={section.description || ""}
-//               onChange={(e) =>
-//                 onFieldChange(`sections[${index}].description`, e.target.value)
-//               }
-//               variant="outlined"
-//               sx={{ marginBottom: 2 }}
-//             />
-
-//             {/* <Button
-//               variant="contained"
-//               color="secondary"
-//               onClick={() => handleDeleteArticle(index)}
-//               sx={{ background: "#d30c0b", marginTop: 1 }}
-//             >
-//               Delete
-//             </Button> */}
-//           </Box>
-//         ))}
-
-//         {/* <Box textAlign="right">
-//           <Button
-//             variant="contained"
-//             onClick={handleAddArticle}
-//             sx={{ background: "#d30c0b" }}
-//           >
-//             Add +
-//           </Button>
-//         </Box> */}
-//       </Box>
-//     </Modal>
-//   );
-// };
+import React, { useState } from "react";
+import { TextField, Box, Typography, Button } from "@mui/material";
+import { deleteArticle } from "@/services/NewsPage/service";
 
 const Section1 = ({ formData, onFieldChange }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -132,9 +17,10 @@ const Section1 = ({ formData, onFieldChange }) => {
     onFieldChange("articles", [...(formData.articles || []), newArticle]);
   };
 
-  const handleDeleteArticle = (index) => {
+  const handleDeleteArticle = async (index, id) => {
     const updatedArticles = [...formData.articles];
     updatedArticles.splice(index, 1);
+    const result = await deleteArticle(id);
     onFieldChange("articles", updatedArticles);
   };
   const handleEditArticle = (index) => {
@@ -236,7 +122,7 @@ const Section1 = ({ formData, onFieldChange }) => {
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => handleDeleteArticle(index)}
+            onClick={() => handleDeleteArticle(index, article._id)}
             sx={{ background: "#d30c0b", marginTop: 1 }}
           >
             Delete

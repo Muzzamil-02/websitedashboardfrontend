@@ -24,7 +24,7 @@ export async function POST(request) {
 
     const bulkOps = articles.map((article) => ({
       updateOne: {
-        filter: { _id: article.id || new mongoose.Types.ObjectId() },
+        filter: { _id: article._id || new mongoose.Types.ObjectId() },
         update: {
           $set: {
             title: article.title,
@@ -48,7 +48,7 @@ export async function POST(request) {
 
     const processedArticles = articles.map((article, index) => ({
       ...article,
-      id: processedIds[index] || article.id,
+      id: processedIds[index] || article._id,
     }));
 
     return new Response(
@@ -97,5 +97,58 @@ export async function GET() {
         "Access-Control-Allow-Origin": "*",
       },
     });
+  }
+}
+
+export async function DELETE(request) {
+  await dbConnect();
+
+  try {
+    const { id } = await request.json();
+
+    if (!id) {
+      return new Response(
+        JSON.stringify({ success: false, message: "Article ID is required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const result = await Article.deleteOne({ _id: id });
+
+    if (result.deletedCount === 0) {
+      return new Response(
+        JSON.stringify({ success: false, message: "Article not found" }),
+        {
+          status: 404,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: "Article deleted successfully",
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (error) {
+    console.error("Delete operation error:", error);
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: error.message || "Server error",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }

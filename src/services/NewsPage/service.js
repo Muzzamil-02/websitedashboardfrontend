@@ -38,3 +38,12 @@ export const articleEditData = async (data) => {
     console.error(`Error saving data for language :`, error);
   }
 };
+
+export const deleteArticle = async (id) => {
+  try {
+    await client.delete(`/insight-articles`, { data: { id: id } });
+    console.log(`Data saved successfully for language: `);
+  } catch (error) {
+    console.error(`Error saving data for language :`, error);
+  }
+};
