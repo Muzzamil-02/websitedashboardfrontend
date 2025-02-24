@@ -55,7 +55,6 @@ export default function Home() {
     const formattedData = JsonToSLugFormatter(values);
     homeEditData(formattedData, selectedLanguage);
   };
-  console.log("initial", initialValues);
 
   return (
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fc" }}>

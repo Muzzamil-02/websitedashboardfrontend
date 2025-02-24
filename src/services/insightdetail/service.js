@@ -2,20 +2,20 @@
 
 import client from "../client";
 
-export const homeEditData = async (data, lang) => {
+export const homeEditData = async (data) => {
   try {
-    await client.put(`/articles-detail`, data);
-    console.log(`Data saved successfully for language: ${lang}`);
+    await client.post(`/articles-detail`, [data]);
+    console.log(`Data saved successfully: `, [data]);
   } catch (error) {
-    console.error(`Error saving data for language ${lang}:`, error);
+    console.error(`Error saving data Article Details:`, error);
   }
 };
 
 export const homeGetData = async (id) => {
   try {
     const result = await client.get(`/articles-detail/${id}`);
-    console.log(`Data fetched successfully for language: `);
-    return result.data;
+    console.log(`Data fetched successfully: `, result);
+    return result;
   } catch (error) {
     console.error(`Error fetching data for language `, error);
   }

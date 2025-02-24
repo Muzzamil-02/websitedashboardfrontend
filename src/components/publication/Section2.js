@@ -10,6 +10,7 @@ const Section2 = ({ formData, onFieldChange }) => {
       text1: "",
       text2: "",
       btn: "",
+      link: "",
     };
     onFieldChange("sections", [...formData.sections, newItem]);
   };
@@ -96,6 +97,17 @@ const Section2 = ({ formData, onFieldChange }) => {
             value={item.img || ""}
             onChange={(e) =>
               onFieldChange(`sections[${index}].img`, e.target.value)
+            }
+            variant="outlined"
+            sx={{ marginBottom: 2 }}
+          />
+
+          <TextField
+            fullWidth
+            label="PDF LINK"
+            value={item.link || ""}
+            onChange={(e) =>
+              onFieldChange(`sections[${index}].link`, e.target.value)
             }
             variant="outlined"
             sx={{ marginBottom: 2 }}

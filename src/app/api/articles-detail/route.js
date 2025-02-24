@@ -54,7 +54,6 @@ export async function POST(request) {
     }));
 
     const result = await ArticleDetail.bulkWrite(detailOps, { ordered: false });
-    console.log("result: ", result);
 
     return new Response(
       JSON.stringify({

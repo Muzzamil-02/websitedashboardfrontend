@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 import { deleteArticle } from "@/services/NewsPage/service";
+import EditArticleModal from "./EditArticleModal";
 
 const Section1 = ({ formData, onFieldChange }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -20,7 +21,7 @@ const Section1 = ({ formData, onFieldChange }) => {
   const handleDeleteArticle = async (index, id) => {
     const updatedArticles = [...formData.articles];
     updatedArticles.splice(index, 1);
-    const result = await deleteArticle(id);
+    await deleteArticle(id);
     onFieldChange("articles", updatedArticles);
   };
   const handleEditArticle = (index) => {
@@ -33,6 +34,7 @@ const Section1 = ({ formData, onFieldChange }) => {
     const updatedArticles = [...formData.articles];
     updatedArticles[selectedIndex] = updatedArticle;
     onFieldChange("articles", updatedArticles);
+    console.log("hh", updatedArticle);
     setOpenModal(false);
   };
   console.log("hdh", formData);

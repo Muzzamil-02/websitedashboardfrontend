@@ -58,7 +58,6 @@ export default function Home() {
     console.log("values", values);
     articleEditData(values?.articles);
   };
-  console.log("initial", initialValues);
   return (
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fc" }}>
       <Sidebar />
