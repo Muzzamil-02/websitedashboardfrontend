@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
-const Section1 = ({ formData, onFieldChange, slug }) => {
+const Section1 = ({ formData, onFieldChange }) => {
   const handleArticleChange = (index, field, value) => {
     const updatedArticles = [...formData.articles];
     updatedArticles[index] = { ...updatedArticles[index], [field]: value };
@@ -17,14 +17,19 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
       categoryLink: "",
       date: "",
     };
-
     onFieldChange("articles", [...(formData?.articles || []), newArticle]);
+  };
+
+  const handleDeleteArticle = (index) => {
+    const updatedArticles = [...formData.articles];
+    updatedArticles.splice(index, 1);
+    onFieldChange("articles", updatedArticles);
   };
 
   return (
     <Box>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Articles
       </Typography>
 
       <TextField
@@ -111,19 +116,26 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
+
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => handleDeleteArticle(index)}
+            sx={{ background: "#d30c0b", marginTop: 1 }}
+          >
+            Delete
+          </Button>
         </Box>
       ))}
 
       <Box textAlign="right">
-        <Box textAlign="right">
-          <Button
-            variant="contained"
-            onClick={handleAddNewArticle}
-            sx={{ background: "#d30c0b" }}
-          >
-            Add +
-          </Button>
-        </Box>
+        <Button
+          variant="contained"
+          onClick={handleAddNewArticle}
+          sx={{ background: "#d30c0b" }}
+        >
+          Add +
+        </Button>
       </Box>
     </Box>
   );

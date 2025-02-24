@@ -7,9 +7,10 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
   return (
     <Box sx={{ padding: 2 }}>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Spectreco's growing
       </Typography>
       <TextField
+        sx={{ paddingBottom: "10px", paddingTop: "10px" }}
         fullWidth
         label="Text"
         name="text"
@@ -20,6 +21,7 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
         rows={4}
       />
       <TextField
+        sx={{ paddingBottom: "10px", paddingTop: "10px" }}
         fullWidth
         label="Button Text"
         name="buttonText"
@@ -28,6 +30,7 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
         variant="outlined"
       />
       <TextField
+        sx={{ paddingBottom: "10px", paddingTop: "10px" }}
         fullWidth
         label="Image URL"
         name="imageUrl"

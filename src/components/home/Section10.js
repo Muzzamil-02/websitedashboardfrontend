@@ -8,7 +8,7 @@ const Section10 = ({ formData, onFieldChange, slug }) => {
     <Box sx={{ marginTop: 4 }}>
       {/* Main Heading */}
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Advisory Section
       </Typography>
 
       {/* Main Heading Input */}

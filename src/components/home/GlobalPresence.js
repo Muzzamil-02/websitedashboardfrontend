@@ -1,3 +1,4 @@
+import { Padding } from "@mui/icons-material";
 import { Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 
@@ -6,7 +7,7 @@ const GlobalPresence = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Global Presence
       </Typography>
 
       <Grid container spacing={2}>
@@ -61,7 +62,12 @@ const GlobalPresence = ({ formData, onFieldChange, slug }) => {
           />
         </Grid>
         {formData?.locations?.map((loc, index) => (
-          <Grid container spacing={2} key={index}>
+          <Grid
+            container
+            spacing={2}
+            key={index}
+            sx={{ paddingBottom: "10px", paddingTop: "10px" }}
+          >
             <Grid item xs={6}>
               <TextField
                 fullWidth

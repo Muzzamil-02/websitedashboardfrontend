@@ -6,7 +6,7 @@ const Section5 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Phases Section
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -20,7 +20,12 @@ const Section5 = ({ formData, onFieldChange, slug }) => {
           />
         </Grid>
         {formData.component?.map((item, index) => (
-          <Grid container spacing={2} key={index} sx={{ marginBottom: 2 }}>
+          <Grid
+            container
+            spacing={2}
+            key={index}
+            sx={{ marginBottom: 2, padding: "10px" }}
+          >
             <Grid item xs={12}>
               <Typography variant="h6">Item {index + 1}</Typography>
             </Grid>
@@ -37,7 +42,12 @@ const Section5 = ({ formData, onFieldChange, slug }) => {
               />
             </Grid>
             {item.content?.map((content, subIndex) => (
-              <Grid container spacing={2} key={subIndex}>
+              <Grid
+                container
+                spacing={2}
+                key={subIndex}
+                sx={{ padding: "10px" }}
+              >
                 <Grid item xs={12}>
                   <TextField
                     fullWidth

@@ -6,7 +6,7 @@ const Section5 = ({ formData, onFieldChange, slug }) => {
   return (
     <Box sx={{ marginTop: 4 }}>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Built Environemnt Section
       </Typography>
 
       <Grid container spacing={2}>

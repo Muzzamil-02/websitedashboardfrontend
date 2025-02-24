@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
-const Section1 = ({ formData, onFieldChange, slug }) => {
+const Section1 = ({ formData, onFieldChange }) => {
   const handleAddArticle = () => {
     const newArticle = {
       image: "",
@@ -10,17 +10,20 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
       category: "",
       date: "",
     };
-    // Add the new article to the articles array in Formik state
     onFieldChange("articles", [...(formData.articles || []), newArticle]);
   };
 
-  console.log("dd", formData);
+  const handleDeleteArticle = (index) => {
+    const updatedArticles = [...formData.articles];
+    updatedArticles.splice(index, 1);
+    onFieldChange("articles", updatedArticles);
+  };
+
   return (
     <div>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Articles
       </Typography>
-      {/* Title */}
       <TextField
         fullWidth
         label="Title"
@@ -30,10 +33,16 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
         sx={{ marginBottom: 2 }}
       />
 
-      {/* Articles */}
-      {/* Articles */}
       {formData.articles.map((article, index) => (
-        <Box key={index} sx={{ marginBottom: 3 }}>
+        <Box
+          key={index}
+          sx={{
+            marginBottom: 3,
+            padding: 2,
+            border: "1px solid #ddd",
+            borderRadius: 2,
+          }}
+        >
           <TextField
             fullWidth
             label={`Image URL for Article ${index + 1}`}
@@ -84,20 +93,26 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
+
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => handleDeleteArticle(index)}
+            sx={{ background: "#d30c0b", marginTop: 1 }}
+          >
+            Delete
+          </Button>
         </Box>
       ))}
 
-      {/* Add Article Button */}
       <Box textAlign="right">
-        <Box textAlign="right">
-          <Button
-            variant="contained"
-            onClick={handleAddArticle}
-            sx={{ background: "#d30c0b" }}
-          >
-            Add +
-          </Button>
-        </Box>
+        <Button
+          variant="contained"
+          onClick={handleAddArticle}
+          sx={{ background: "#d30c0b" }}
+        >
+          Add +
+        </Button>
       </Box>
     </div>
   );

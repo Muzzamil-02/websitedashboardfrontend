@@ -1,26 +1,39 @@
 import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
-const Section1 = ({ formData, onFieldChange, slug }) => {
+const Section1 = ({ formData, onFieldChange }) => {
   const handleAddArticle = () => {
-    console.log("in");
     const newArticle = {
       mainHeading: "",
       date: "",
-
       imageURL: "",
       description: "",
     };
     onFieldChange("sections", [...(formData?.sections || []), newArticle]);
   };
+
+  const handleDeleteArticle = (index) => {
+    const updatedSections = [...formData.sections];
+    updatedSections.splice(index, 1);
+    onFieldChange("sections", updatedSections);
+  };
+
   return (
     <Box>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Articles
       </Typography>
 
       {formData.sections.map((section, index) => (
-        <Box key={index} sx={{ marginBottom: 3 }}>
+        <Box
+          key={index}
+          sx={{
+            marginBottom: 3,
+            padding: 2,
+            border: "1px solid #ddd",
+            borderRadius: 2,
+          }}
+        >
           <Typography variant="subtitle1">Section {index + 1}</Typography>
 
           <TextField
@@ -68,18 +81,26 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
-        </Box>
-      ))}
-      <Box textAlign="right">
-        <Box textAlign="right">
+
           <Button
             variant="contained"
-            onClick={handleAddArticle}
-            sx={{ background: "#d30c0b" }}
+            color="secondary"
+            onClick={() => handleDeleteArticle(index)}
+            sx={{ background: "#d30c0b", marginTop: 1 }}
           >
-            Add +
+            Delete
           </Button>
         </Box>
+      ))}
+
+      <Box textAlign="right">
+        <Button
+          variant="contained"
+          onClick={handleAddArticle}
+          sx={{ background: "#d30c0b" }}
+        >
+          Add +
+        </Button>
       </Box>
     </Box>
   );

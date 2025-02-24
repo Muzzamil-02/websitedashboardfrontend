@@ -6,7 +6,7 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Give it a try, it's free! Scetion
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>

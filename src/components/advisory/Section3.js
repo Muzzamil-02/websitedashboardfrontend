@@ -6,7 +6,7 @@ const Section3 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Sprint Centric Delivery Model Section
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -30,7 +30,7 @@ const Section3 = ({ formData, onFieldChange, slug }) => {
           />
         </Grid>
         {formData.steps.map((step, index) => (
-          <Grid container spacing={2} key={index}>
+          <Grid container spacing={2} key={index} sx={{ padding: "10px" }}>
             <Grid item xs={12}>
               <TextField
                 fullWidth

@@ -8,7 +8,7 @@ const Section6 = ({ formData, onFieldChange, slug }) => {
     <Box sx={{ marginTop: 4 }}>
       {/* Section 6 Main Heading */}
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Technology Section
       </Typography>
 
       <Grid container spacing={2}>
@@ -61,9 +61,7 @@ const Section6 = ({ formData, onFieldChange, slug }) => {
           Object.keys(formData.ServiceCard).map((key) => (
             <Grid item xs={12} md={6} key={key}>
               <Paper sx={{ padding: 3, borderRadius: 2, boxShadow: 3 }}>
-                <Typography variant="h6">
-                  {formData.ServiceCard[key].title}
-                </Typography>
+                <Typography variant="h6">Service 4 Cards Section</Typography>
                 <TextField
                   fullWidth
                   label="Title"

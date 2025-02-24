@@ -7,7 +7,7 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Articles
       </Typography>
       <Grid container spacing={2}>
         {/* Editable TextField for Heading */}

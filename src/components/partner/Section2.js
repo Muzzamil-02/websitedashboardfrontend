@@ -7,7 +7,7 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
   return (
     <div>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Power of collaboration Section
       </Typography>
       <TextField
         fullWidth

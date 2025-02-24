@@ -5,9 +5,9 @@ import { Grid, TextField, Typography } from "@mui/material";
 
 const Section1 = ({ formData, onFieldChange, slug }) => {
   return (
-    <Grid container spacing={2}>
+    <Grid container>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Our Trusted Partnerships Section
       </Typography>
       <Grid item xs={12}>
         <TextField

@@ -6,7 +6,7 @@ const Section8 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Center Image CTA Section
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>

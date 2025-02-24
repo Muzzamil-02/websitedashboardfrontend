@@ -9,11 +9,11 @@ const Section7 = ({ formData, onFieldChange, slug }) => {
     <Box sx={{ marginTop: 4 }}>
       {/* Section Heading */}
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Technology Features
       </Typography>
 
       {/* Heading Input */}
-      <Grid container spacing={2}>
+      {/* <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -24,12 +24,9 @@ const Section7 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
           />
         </Grid>
-      </Grid>
+      </Grid> */}
 
       {/* Card Data Section */}
-      <Typography variant="h6" sx={{ marginTop: 3 }}>
-        Technology Features
-      </Typography>
 
       <Grid container spacing={2} sx={{ marginTop: 2 }}>
         {formData.cardData &&

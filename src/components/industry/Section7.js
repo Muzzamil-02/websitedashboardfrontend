@@ -6,7 +6,7 @@ const Section7 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Enhanced Access to Capital
       </Typography>
       {formData.component?.map((component, index) => (
         <Grid container spacing={2} key={index} sx={{ marginBottom: 2 }}>

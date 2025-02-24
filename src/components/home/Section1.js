@@ -7,7 +7,7 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Top Hero Section
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12}>

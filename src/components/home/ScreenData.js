@@ -7,7 +7,7 @@ const ScreenData = ({ formData, onFieldChange, slug }) => {
   return (
     <Box sx={{ marginTop: 4 }}>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Screen Data Section
       </Typography>
 
       {/* Image URL Field */}

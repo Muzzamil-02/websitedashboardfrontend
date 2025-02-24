@@ -9,8 +9,8 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
 
   return (
     <>
-      <Typography variant="h5" gutterBottom>
-        {slug}
+      <Typography variant="h5" gutterBottom sx={{ paddingBottom: "10px" }}>
+        Advisory Services We Offer Section
       </Typography>
       <Grid container spacing={2}>
         {Object.entries(formData).map(([key, service], index) => {

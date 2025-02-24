@@ -5,7 +5,7 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
   return (
     <Box>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Publications Top Section
       </Typography>
 
       <TextField

@@ -47,7 +47,7 @@ const SecondSwiper = ({ formData, onFieldChange, slug }) => {
       />
 
       {formData.components.map((component, index) => (
-        <Grid container spacing={2} key={index}>
+        <Grid container spacing={2} key={index} sx={{ padding: "10px" }}>
           <Grid item xs={12}>
             <TextField
               fullWidth

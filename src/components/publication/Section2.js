@@ -1,14 +1,7 @@
 import React from "react";
 import { TextField, Box, Typography, Button } from "@mui/material";
 
-const Section2 = ({ formData, onFieldChange, slug }) => {
-  // const handleListChange = (index, field, value) => {
-  //   const updatedList = [...formData.list];
-  //   updatedList[index] = { ...updatedList[index], [field]: value };
-  //   onFieldChange( "list", updatedList);
-  // };
-  // console.log("form", formData);
-
+const Section2 = ({ formData, onFieldChange }) => {
   const handleAddNewItem = () => {
     const newItem = {
       img: "",
@@ -21,10 +14,15 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
     onFieldChange("sections", [...formData.sections, newItem]);
   };
 
+  const handleDeleteItem = (index) => {
+    const updatedSections = formData.sections.filter((_, i) => i !== index);
+    onFieldChange("sections", updatedSections);
+  };
+
   return (
     <Box>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        White Paper Section
       </Typography>
 
       {formData.sections?.map((item, index) => (
@@ -58,6 +56,7 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
+
           <TextField
             fullWidth
             label="Text1"
@@ -68,6 +67,7 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
+
           <TextField
             fullWidth
             label="Text2"
@@ -100,19 +100,25 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
+
+          <Button
+            variant="contained"
+            onClick={() => handleDeleteItem(index)}
+            sx={{ background: "#d30c0b", marginTop: 1 }}
+          >
+            Delete
+          </Button>
         </Box>
       ))}
 
       <Box textAlign="right">
-        <Box textAlign="right">
-          <Button
-            variant="contained"
-            onClick={handleAddNewItem}
-            sx={{ background: "#d30c0b" }}
-          >
-            Add +
-          </Button>
-        </Box>
+        <Button
+          variant="contained"
+          onClick={handleAddNewItem}
+          sx={{ background: "#d30c0b" }}
+        >
+          Add +
+        </Button>
       </Box>
     </Box>
   );

@@ -6,10 +6,10 @@ const Section4 = ({ formData, onFieldChange, slug }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Amount Section
       </Typography>
       {formData.component.map((item, index) => (
-        <Grid container spacing={2} key={index}>
+        <Grid container spacing={2} key={index} sx={{ padding: "10px" }}>
           <Grid item xs={6}>
             <TextField
               fullWidth

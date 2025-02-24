@@ -27,14 +27,13 @@ const sectionComponents = {
   Section2,
   Section3,
   Section4,
-
-  Section7,
 };
 
 export default function Home() {
   const [languages] = useState([
     { label: "English", code: "en" },
     { label: "Finnish", code: "fn" },
+    { label: "Arabic", code: "ar" },
   ]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [initialValues, setInitialValues] = useState({});
