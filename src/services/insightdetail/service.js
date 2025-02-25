@@ -17,6 +17,6 @@ export const homeGetData = async (id) => {
     console.log(`Data fetched successfully: `, result);
     return result;
   } catch (error) {
-    console.error(`Error fetching data for language `, error);
+    console.log(`Error fetching data for language `, error);
   }
 };

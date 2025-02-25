@@ -18,7 +18,6 @@ import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
 import section1 from "@/components/industry/Section1";
 import section2 from "@/components/industry/Section2";
 import section3 from "@/components/industry/Section3";
-import section4 from "@/components/industry/Section4";
 import section5 from "@/components/industry/Section5";
 import section6 from "@/components/industry/Section6";
 import section7 from "@/components/industry/Section7";
@@ -30,13 +29,11 @@ import section12 from "@/components/industry/Section12";
 import keyskaeholderslider from "@/components/industry/KeyStakeholderSlider";
 
 import secondSwiper from "@/components/industry/SecondSwiper";
-import { Agriculture } from "@mui/icons-material";
 
 const sectionComponents = {
   section1,
   section2,
   section3,
-  // section4,
   section5,
   section6,
   section7,
@@ -64,7 +61,7 @@ export default function Home() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await homeGetData(selectedLanguage, "realeastate");
+        const data = await homeGetData(selectedLanguage, "real-estate");
         if (data) {
           setInitialValues(JsonFormatter(data));
         }
