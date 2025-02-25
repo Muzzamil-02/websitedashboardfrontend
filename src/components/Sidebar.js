@@ -115,6 +115,18 @@ const Sidebar = () => {
 
       path: "footer",
     },
+    {
+      id: 26,
+      text: "PublicationInfo",
+
+      path: "getpublicationdata",
+    },
+    {
+      id: 27,
+      text: "ContactInfo",
+
+      path: "contactgetdata",
+    },
   ];
 
   return (
