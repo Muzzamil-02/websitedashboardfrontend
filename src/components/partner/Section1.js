@@ -11,6 +11,7 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
       </Typography>
       <Grid item xs={12}>
         <TextField
+          sx={{ padding: "10px" }}
           fullWidth
           label="Heading"
           name="heading"
@@ -21,6 +22,7 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
       </Grid>
       <Grid item xs={12}>
         <TextField
+          sx={{ padding: "10px" }}
           fullWidth
           label="Description"
           name="description"
@@ -33,6 +35,7 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
       </Grid>
       <Grid item xs={12}>
         <TextField
+          sx={{ padding: "10px" }}
           fullWidth
           label="Button Text"
           name="buttonText"
@@ -43,6 +46,7 @@ const Section1 = ({ formData, onFieldChange, slug }) => {
       </Grid>
       <Grid item xs={12}>
         <TextField
+          sx={{ padding: "10px" }}
           fullWidth
           label="Image URL"
           name="imageUrl"

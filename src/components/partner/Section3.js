@@ -11,6 +11,7 @@ const Section3 = ({ formData, onFieldChange, slug }) => {
       </Typography>
       <Grid item xs={12}>
         <TextField
+          sx={{ padding: "10px" }}
           fullWidth
           label="Heading"
           name="heading"

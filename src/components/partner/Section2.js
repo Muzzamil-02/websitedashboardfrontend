@@ -11,6 +11,7 @@ const Section2 = ({ formData, onFieldChange, slug }) => {
       </Typography>
       <TextField
         fullWidth
+        sx={{ padding: "10px" }}
         multiline
         rows={4}
         name="Text"
