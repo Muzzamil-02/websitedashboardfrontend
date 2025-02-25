@@ -11,6 +11,7 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
+import { toast } from "react-hot-toast";
 import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
 import { homeEditData, homeGetData } from "@/services/industry/service.js";

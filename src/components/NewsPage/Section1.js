@@ -44,15 +44,6 @@ const Section1 = ({ formData, onFieldChange }) => {
         Articles
       </Typography>
 
-      <TextField
-        fullWidth
-        label="Title"
-        value={formData.title}
-        onChange={(e) => onFieldChange("title", e.target.value)}
-        variant="outlined"
-        sx={{ marginBottom: 2 }}
-      />
-
       {formData.articles.map((article, index) => (
         <Box
           key={index}

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-hot-toast";
 import Sidebar from "@/components/Sidebar";
 import section1 from "@/components/about/Section1";
 import section2 from "@/components/about/Section2";
@@ -63,7 +64,14 @@ export default function About() {
 
   const handleSaveChanges = (values) => {
     const formattedData = JsonToSLugFormatter(values);
-    homeEditData(formattedData, selectedLanguage);
+
+    homeEditData(formattedData, selectedLanguage)
+      .then(() => {
+        toast.success("Data updated Successfully");
+      })
+      .catch(() => {
+        toast.error("Failed to save data.");
+      });
   };
 
   return (

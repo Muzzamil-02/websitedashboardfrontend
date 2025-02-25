@@ -11,6 +11,7 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
+
 import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
 import { homeEditData, homeGetData } from "@/services/home/service.js";
@@ -31,6 +32,7 @@ import globalPresence from "@/components/home/GlobalPresence";
 import ServiceCard from "@/components/home/ServiceCard";
 import FaceCardSection from "@/components/home/FaceCardSection";
 import newteamsection from "@/components/home/NewTeamSection";
+import { toast } from "react-hot-toast";
 
 const sectionComponents = {
   Section1,
@@ -81,7 +83,14 @@ export default function Home() {
 
   const handleSaveChanges = (values) => {
     const formattedData = JsonToSLugFormatter(values);
-    homeEditData(formattedData, selectedLanguage);
+
+    homeEditData(formattedData, selectedLanguage)
+      .then(() => {
+        toast.success("Data updated Successfully");
+      })
+      .catch(() => {
+        toast.error("Failed to save data.");
+      });
   };
 
   return (

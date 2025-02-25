@@ -11,6 +11,7 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
+import { toast } from "react-hot-toast";
 import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
 import { homeEditData, homeGetData } from "@/services/news/service.js";
@@ -51,7 +52,14 @@ export default function Home() {
 
   const handleSaveChanges = (values) => {
     const formattedData = JsonToSLugFormatter(values);
-    homeEditData(formattedData, selectedLanguage);
+
+    homeEditData(formattedData, selectedLanguage)
+      .then(() => {
+        toast.success("Data updated Successfully");
+      })
+      .catch(() => {
+        toast.error("Failed to save data.");
+      });
   };
   return (
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fc" }}>

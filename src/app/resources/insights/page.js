@@ -56,7 +56,13 @@ export default function Home() {
 
   const handleSaveChanges = (values) => {
     console.log("values", values);
-    articleEditData(values?.articles);
+    articleEditData(values?.articles)
+      .then(() => {
+        toast.success("Data updated Successfully");
+      })
+      .catch(() => {
+        toast.error("Failed to save data.");
+      });
   };
   return (
     <Box sx={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fc" }}>
@@ -100,6 +106,7 @@ export default function Home() {
                     }
                     slug="Section 1"
                   />
+
                   <Box textAlign="center" sx={{ marginTop: 3 }}>
                     <Button
                       type="submit"

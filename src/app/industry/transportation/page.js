@@ -11,6 +11,7 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
+import { toast } from "react-hot-toast";
 import { Formik, Form } from "formik";
 import Sidebar from "@/components/Sidebar";
 import { homeEditData, homeGetData } from "@/services/industry/service.js";
@@ -80,7 +81,13 @@ export default function Home() {
 
   const handleSaveChanges = (values) => {
     const formattedData = JsonToSLugFormatter(values);
-    homeEditData(formattedData, selectedLanguage, "transportation");
+    homeEditData(formattedData, selectedLanguage, "transportation")
+      .then(() => {
+        toast.success("Data updated Successfully");
+      })
+      .catch(() => {
+        toast.error("Failed to save data.");
+      });
   };
 
   return (

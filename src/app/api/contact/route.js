@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import Contact from "@/models/Contact";
+import nodemailer from "nodemailer";
 
 export async function GET(request) {
   await dbConnect();
@@ -32,8 +33,32 @@ export async function POST(request) {
 
   try {
     const body = await request.json();
+
     const newContact = new Contact(body);
+
+    const email = newContact.email;
+    console.log("email", email);
     const savedContact = await newContact.save();
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.office365.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: process.env.SMTP_USERNAME,
+        pass: process.env.SMTP_PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      from: "admin@spectreco.com",
+      to: email,
+      subject: "Double Meteriality Form",
+      text: "This is contact Form data",
+    };
+
+    await transporter.sendMail(mailOptions);
 
     return new Response(JSON.stringify(savedContact), {
       status: 201,

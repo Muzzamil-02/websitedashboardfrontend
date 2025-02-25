@@ -42,7 +42,7 @@ const Sidebar = () => {
     },
     {
       id: 5,
-      text: "Industry",
+      text: "/Industry",
 
       subItems: [
         {
@@ -101,31 +101,31 @@ const Sidebar = () => {
       id: 23,
       text: "Policy",
 
-      path: "policy",
+      path: "/policy",
     },
     {
       id: 24,
       text: "Navbar",
 
-      path: "navbar",
+      path: "/navbar",
     },
     {
       id: 25,
       text: "Footer",
 
-      path: "footer",
+      path: "/footer",
     },
     {
       id: 26,
       text: "PublicationInfo",
 
-      path: "getpublicationdata",
+      path: "/getpublicationdata",
     },
     {
       id: 27,
       text: "ContactInfo",
 
-      path: "contactgetdata",
+      path: "/contactgetdata",
     },
   ];
 
