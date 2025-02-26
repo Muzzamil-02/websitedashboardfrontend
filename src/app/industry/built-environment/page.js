@@ -65,7 +65,7 @@ export default function Home() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await homeGetData(selectedLanguage, "builtenvironment");
+        const data = await homeGetData(selectedLanguage, "built-environment");
         if (data) {
           setInitialValues(JsonFormatter(data));
         }
@@ -82,8 +82,10 @@ export default function Home() {
   const handleSaveChanges = (values) => {
     const formattedData = JsonToSLugFormatter(values);
     homeEditData(formattedData, selectedLanguage, "builtenvironment")
-      .then(() => {
-        toast.success("Data updated Successfully");
+      .then((res) => {
+        if (res) {
+          toast.success(`Data updated Successfully ${res}`);
+        }
       })
       .catch(() => {
         toast.error("Failed to save data.");

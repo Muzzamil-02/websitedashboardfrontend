@@ -6,8 +6,9 @@ export const homeEditData = async (data, lang) => {
   try {
     await client.put(`/pages/${lang}/insight`, data);
     console.log(`Data saved successfully for language: ${lang}`);
+    return true;
   } catch (error) {
-    console.error(`Error saving data for language ${lang}:`, error);
+    console.log(`Error saving data for language ${lang}:`, error);
   }
 };
 
@@ -34,7 +35,7 @@ export const articleEditData = async (data) => {
     await client.post(`/insight-articles`, data);
     console.log(`Data saved successfully for language: `);
   } catch (error) {
-    console.error(`Error saving data for language :`, error);
+    console.log(`Error saving data for language :`, error);
   }
 };
 
@@ -43,6 +44,6 @@ export const deleteArticle = async (id) => {
     await client.delete(`/insight-articles`, { data: { id: id } });
     console.log(`Data saved successfully for language: `);
   } catch (error) {
-    console.error(`Error saving data for language :`, error);
+    console.log(`Error saving data for language :`, error);
   }
 };

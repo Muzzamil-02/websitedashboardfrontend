@@ -149,7 +149,7 @@ const Sidebar = () => {
           <img
             src="https://fi.spectreco.com/images/logo.png"
             alt="Logo"
-            style={{ width: "150px", height: "auto" }}
+            style={{ width: "200px", height: "auto" }}
           />
         </Link>
       </Box>
@@ -207,9 +207,6 @@ const Sidebar = () => {
                         "&:hover": { backgroundColor: "#d30c0b" },
                       }}
                     >
-                      {/* <ListItemIcon sx={{ color: "#2962ff" }}>
-                        <WorkIcon />
-                      </ListItemIcon> */}
                       <ListItemText primary={subItem.text} />
                     </ListItem>
                   ))}

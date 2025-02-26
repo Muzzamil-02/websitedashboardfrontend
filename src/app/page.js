@@ -85,8 +85,11 @@ export default function Home() {
     const formattedData = JsonToSLugFormatter(values);
 
     homeEditData(formattedData, selectedLanguage)
-      .then(() => {
-        toast.success("Data updated Successfully");
+      .then((res) => {
+        console.log(res);
+        if (res) {
+          toast.success(`Data updated Successfully ${res}`);
+        }
       })
       .catch(() => {
         toast.error("Failed to save data.");

@@ -1,6 +1,6 @@
 // pages/api/login.js
-import dbConnect from "@/lib/dbConnect"; // Ensure the path is correct
-import User from "@/models/User"; // Ensure the path is correct
+import dbConnect from "@/lib/dbConnect";
+import User from "@/models/User";
 import jwt from "jsonwebtoken";
 
 export async function POST(req) {

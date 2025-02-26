@@ -7,7 +7,7 @@ export const homeEditData = async (data) => {
     await client.post(`/articles-detail`, [data]);
     console.log(`Data saved successfully: `, [data]);
   } catch (error) {
-    console.error(`Error saving data Article Details:`, error);
+    console.log(`Error saving data Article Details:`, error);
   }
 };
 

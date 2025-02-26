@@ -1,5 +1,6 @@
 import { AuthService } from "@/services/auth/service";
 import { toast } from "react-hot-toast";
+import jwt from "jsonwebtoken";
 
 export const AuthHelper = {
   login: async (email, password, router) => {
@@ -9,6 +10,7 @@ export const AuthHelper = {
       if (token && userId) {
         localStorage.setItem("token", token);
         localStorage.setItem("userId", userId);
+        document.cookie = `authToken=${token}; path=/; max-age=${60 * 60 * 24}`;
         toast.success("Login successful!");
 
         router.push("/");
@@ -40,3 +42,18 @@ export const AuthHelper = {
     }
   },
 };
+
+export function authMiddleware(request) {
+  const authHeader = request.headers.get("Authorization");
+  if (!authHeader?.startsWith("Bearer "))
+    return new Response(
+      JSON.stringify({ success: false, message: "Unauthorized" }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
+
+  try {
+    return jwt.verify(authHeader.split(" ")[1], process.env.JWT_SECRET);
+  } catch (error) {
+    return null;
+  }
+}

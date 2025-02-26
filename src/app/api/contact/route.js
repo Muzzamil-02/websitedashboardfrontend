@@ -1,4 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
+import { authMiddleware } from "@/lib/helpers/auth/helper";
 import Contact from "@/models/Contact";
 import nodemailer from "nodemailer";
 
@@ -32,6 +33,15 @@ export async function POST(request) {
   await dbConnect();
 
   try {
+    const authCheck = authMiddleware(request);
+
+    if (!authCheck.admin) {
+      return new Response(
+        JSON.stringify({ success: false, message: "Forbidden" }),
+        { status: 403, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     const body = await request.json();
 
     const newContact = new Contact(body);

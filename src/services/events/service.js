@@ -6,8 +6,9 @@ export const homeEditData = async (data, lang) => {
   try {
     await client.put(`/pages/${lang}/event`, data);
     console.log(`Data saved successfully for language: ${lang}`);
+    return true;
   } catch (error) {
-    console.error(`Error saving data for language ${lang}:`, error);
+    console.log(`Error saving data for language ${lang}:`, error);
   }
 };
 

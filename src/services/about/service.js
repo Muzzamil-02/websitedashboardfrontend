@@ -1,13 +1,16 @@
 "use client";
 
 import client from "../client";
+import toast from "react-hot-toast";
 
 export const homeEditData = async (data, lang) => {
   try {
     await client.put(`/pages/${lang}/about`, data);
     console.log(`Data saved successfully for language: ${lang}`);
+    return true;
   } catch (error) {
-    console.error(`Error saving data for language ${lang}:`, error);
+    toast.error(error);
+    console.log(`Error saving data for language ${lang}:`, error);
   }
 };
 

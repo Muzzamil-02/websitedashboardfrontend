@@ -1,8 +1,19 @@
 import dbConnect from "@/lib/dbConnect";
 import Language from "@/models/Language";
+import { authMiddleware } from "@/lib/helpers/auth/helper";
 
 export async function PUT(request, { params }) {
   await dbConnect();
+  const authCheck = authMiddleware(request);
+
+  console.log("authCheck", authCheck);
+
+  if (!authCheck?.userId) {
+    return new Response(
+      JSON.stringify({ success: false, message: "Forbidden" }),
+      { status: 403, headers: { "Content-Type": "application/json" } }
+    );
+  }
   const { lang, page } = await params;
   const securityHeaders = {
     "Content-Type": "application/json",
