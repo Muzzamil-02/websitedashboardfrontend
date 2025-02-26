@@ -1,6 +1,7 @@
 import { AuthService } from "@/services/auth/service";
 import { toast } from "react-hot-toast";
 import jwt from "jsonwebtoken";
+// import { useRouter } from "next/navigation";
 
 export const AuthHelper = {
   login: async (email, password, router) => {
@@ -20,11 +21,14 @@ export const AuthHelper = {
       toast.error(err);
     }
   },
-  logout: () => {
+  logout: (router) => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    document.cookie =
+      "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     router.push("/login");
   },
+
   signup: async (email, password, router) => {
     try {
       const { token, userId } = await AuthService.signup(email, password);

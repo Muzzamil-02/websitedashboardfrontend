@@ -9,6 +9,7 @@ import {
   Drawer,
   Collapse,
   Box,
+  Button,
 } from "@mui/material";
 
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -16,10 +17,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // import WorkIcon from "@mui/icons-material/Work";
 import { useState } from "react";
 import Link from "next/link";
+import { AuthHelper } from "@/lib/helpers/auth/helper";
 
 const Sidebar = () => {
   const router = useRouter();
   const [openSections, setOpenSections] = useState({});
+  const handleLogout = () => {
+    AuthHelper.logout(router);
+  };
 
   const toggleSection = (id) => {
     setOpenSections((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -216,6 +221,15 @@ const Sidebar = () => {
           </div>
         ))}
       </List>
+      <Box sx={{ textAlign: "center", padding: "20px", width: "100%" }}>
+        <Button
+          variant="contained"
+          sx={{ background: "#d30c0b" }}
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      </Box>
     </Drawer>
   );
 };

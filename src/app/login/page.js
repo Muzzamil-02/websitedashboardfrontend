@@ -71,7 +71,7 @@ const page = () => {
             Login
           </Button>
         </form>
-        <Box mt={2}>
+        {/* <Box mt={2}>
           <Typography variant="body2" color="textSecondary">
             Don't have an account?{" "}
             <Link
@@ -82,7 +82,7 @@ const page = () => {
               Sign up here
             </Link>
           </Typography>
-        </Box>
+        </Box> */}
       </Paper>
     </Container>
   );
