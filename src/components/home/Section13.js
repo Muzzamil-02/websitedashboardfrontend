@@ -6,7 +6,7 @@ const Section13 = ({ formData, onFieldChange, slug }) => {
   return (
     <Box sx={{ marginTop: 4 }}>
       <Typography variant="h5" gutterBottom>
-        {slug}
+        Section13
       </Typography>
 
       <Grid container spacing={2}>
@@ -66,9 +66,33 @@ const Section13 = ({ formData, onFieldChange, slug }) => {
             fullWidth
             label="Image URL"
             name="image"
-            value={formData.image}
+            value={formData?.image || ""}
             onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ display: "none" }}
+                    id="advisory"
+                  />
+                  <label htmlFor="advisory">
+                    <IconButton component="span" disabled={uploading}>
+                      {uploading ? (
+                        <CircularProgress size={24} sx={{ color: "#d30c0b" }} />
+                      ) : (
+                        <CameraAltIcon
+                          sx={{ color: "#d30c0b", fontSize: "30px" }}
+                        />
+                      )}
+                    </IconButton>
+                  </label>
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
       </Grid>

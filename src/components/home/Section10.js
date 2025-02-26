@@ -1,9 +1,46 @@
-"use client";
+import { useState } from "react";
+import {
+  Grid,
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton,
+  CircularProgress,
+  Box,
+  Paper,
+} from "@mui/material";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { uploadToS3 } from "@/lib/uploadToS3 ";
+import Image from "next/image";
 
-import { Grid, TextField, Typography, Box, Paper } from "@mui/material";
-import parse from "html-react-parser"; // Install this package to parse HTML
+const Section10 = ({ formData, onFieldChange }) => {
+  const [uploading, setUploading] = useState(false);
 
-const Section10 = ({ formData, onFieldChange, slug }) => {
+  const handleFileChange = (e, fieldName) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+
+    uploadToS3(
+      file,
+      (url) => {
+        console.log("Uploaded URL:", url);
+        onFieldChange(fieldName, url); // Pass the dynamic field name
+        setUploading(false);
+        toast.success("Image uploaded successfully!", {
+          position: "top-right",
+        });
+      },
+      (error) => {
+        console.error("Upload failed:", error);
+        setUploading(false);
+        toast.error("Image upload failed!", { position: "top-right" });
+      }
+    );
+  };
   return (
     <Box sx={{ marginTop: 4 }}>
       {/* Main Heading */}
@@ -82,7 +119,36 @@ const Section10 = ({ formData, onFieldChange, slug }) => {
                 value={item.imageURL}
                 onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
-                sx={{ marginBottom: 1 }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          handleFileChange(e, `component.${index}.imageURL`)
+                        }
+                        style={{ display: "none" }}
+                        id={`component.${index}.imageURL`}
+                      />
+
+                      <label htmlFor={`component.${index}.imageURL`}>
+                        <IconButton component="span" disabled={uploading}>
+                          {uploading ? (
+                            <CircularProgress
+                              size={24}
+                              sx={{ color: "#d30c0b" }}
+                            />
+                          ) : (
+                            <CameraAltIcon
+                              sx={{ color: "#d30c0b", fontSize: "30px" }}
+                            />
+                          )}
+                        </IconButton>
+                      </label>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Paper>
           </Grid>
