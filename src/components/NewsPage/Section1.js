@@ -171,22 +171,24 @@ const Section1 = ({ formData, onFieldChange }) => {
             variant="outlined"
             sx={{ marginBottom: 2 }}
           />
-          <Button
-            variant="contained"
-            onClick={() => handleEditArticle(index)}
-            sx={{ marginRight: 1 }}
-          >
-            Edit
-          </Button>
+          <Box display="flex" justifyContent="space-between">
+            <Button
+              variant="contained"
+              onClick={() => handleEditArticle(index)}
+              sx={{ background: "green", marginTop: 1 }}
+            >
+              Edit
+            </Button>
 
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => handleDeleteArticle(index, article._id)}
-            sx={{ background: "#d30c0b", marginTop: 1 }}
-          >
-            Delete
-          </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => handleDeleteArticle(index, article._id)}
+              sx={{ background: "#d30c0b", marginTop: 1 }}
+            >
+              Delete
+            </Button>
+          </Box>
         </Box>
       ))}
 
