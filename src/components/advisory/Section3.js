@@ -37,13 +37,7 @@ const Section3 = ({ formData, onFieldChange, slug }) => {
                 label={`Step ${index + 1} Title`}
                 name={`steps[${index}].title`}
                 value={step.title}
-                onChange={(e) =>
-                  onFieldChange(
-                    `section3.steps[${index}]`,
-                    "title",
-                    e.target.value
-                  )
-                }
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
               />
             </Grid>

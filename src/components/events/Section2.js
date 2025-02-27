@@ -1,15 +1,20 @@
-"use client";
-
-import React from "react";
+import { useState } from "react";
 import {
   Grid,
+  TextField,
   Typography,
+  InputAdornment,
+  IconButton,
+  CircularProgress,
+  Box,
   Card,
   CardContent,
   Button,
-  TextField,
-  Box,
 } from "@mui/material";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { uploadToS3 } from "@/lib/uploadToS3 ";
 
 const Section2 = ({ formData, onFieldChange }) => {
   const handleAddArticle = () => {
@@ -26,6 +31,31 @@ const Section2 = ({ formData, onFieldChange }) => {
     const updatedSections = [...formData.sections];
     updatedSections.splice(index, 1);
     onFieldChange("sections", updatedSections);
+  };
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileChange = (e, fieldName) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+
+    uploadToS3(
+      file,
+      (url) => {
+        console.log("Uploaded URL:", url);
+        onFieldChange(fieldName, url); // Pass the dynamic field name
+        setUploading(false);
+        toast.success("Image uploaded successfully!", {
+          position: "top-right",
+        });
+      },
+      (error) => {
+        console.error("Upload failed:", error);
+        setUploading(false);
+        toast.error("Image upload failed!", { position: "top-right" });
+      }
+    );
   };
 
   return (
@@ -63,12 +93,40 @@ const Section2 = ({ formData, onFieldChange }) => {
                 <TextField
                   fullWidth
                   label="Image URL"
+                  name={`sections[${index}].image`}
                   value={event.image}
-                  onChange={(e) =>
-                    onFieldChange(`sections[${index}].image`, e.target.value)
-                  }
+                  onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                   variant="outlined"
-                  sx={{ marginBottom: 2 }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) =>
+                            handleFileChange(e, `sections[${index}].image`)
+                          }
+                          style={{ display: "none" }}
+                          id={`sections[${index}].image`}
+                        />
+
+                        <label htmlFor={`sections[${index}].image`}>
+                          <IconButton component="span" disabled={uploading}>
+                            {uploading ? (
+                              <CircularProgress
+                                size={24}
+                                sx={{ color: "#d30c0b" }}
+                              />
+                            ) : (
+                              <CameraAltIcon
+                                sx={{ color: "#d30c0b", fontSize: "30px" }}
+                              />
+                            )}
+                          </IconButton>
+                        </label>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
 
                 <TextField

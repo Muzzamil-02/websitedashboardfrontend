@@ -47,7 +47,7 @@ const Sidebar = () => {
     },
     {
       id: 5,
-      text: "/Industry",
+      text: "Industry",
 
       subItems: [
         {
@@ -83,11 +83,6 @@ const Sidebar = () => {
           text: "Research & Publications",
           path: "/resources/research-publication",
         },
-        {
-          id: 21,
-          text: "Detail Insights",
-          path: "/resources/insights-detail",
-        },
       ],
     },
     // {
@@ -97,37 +92,37 @@ const Sidebar = () => {
 
     // },
     {
-      id: 22,
+      id: 21,
       text: "Term",
 
       path: "/term",
     },
     {
-      id: 23,
+      id: 22,
       text: "Policy",
 
       path: "/policy",
     },
     {
-      id: 24,
+      id: 23,
       text: "Navbar",
 
       path: "/navbar",
     },
     {
-      id: 25,
+      id: 24,
       text: "Footer",
 
       path: "/footer",
     },
     {
-      id: 26,
+      id: 25,
       text: "PublicationInfo",
 
       path: "/getpublicationdata",
     },
     {
-      id: 27,
+      id: 26,
       text: "ContactInfo",
 
       path: "/contactgetdata",

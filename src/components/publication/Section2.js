@@ -1,5 +1,19 @@
-import React from "react";
-import { TextField, Box, Typography, Button } from "@mui/material";
+import { useState } from "react";
+import {
+  Grid,
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton,
+  CircularProgress,
+  Box,
+  Button,
+} from "@mui/material";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { uploadToS3 } from "@/lib/uploadToS3 ";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
 const Section2 = ({ formData, onFieldChange }) => {
   const handleAddNewItem = () => {
@@ -13,6 +27,31 @@ const Section2 = ({ formData, onFieldChange }) => {
       link: "",
     };
     onFieldChange("sections", [...formData.sections, newItem]);
+  };
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileChange = (e, fieldName) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+
+    uploadToS3(
+      file,
+      (url) => {
+        console.log("Uploaded URL:", url);
+        onFieldChange(fieldName, url); // Pass the dynamic field name
+        setUploading(false);
+        toast.success("Image uploaded successfully!", {
+          position: "top-right",
+        });
+      },
+      (error) => {
+        console.error("Upload failed:", error);
+        setUploading(false);
+        toast.error("Image upload failed!", { position: "top-right" });
+      }
+    );
   };
 
   const handleDeleteItem = (index) => {
@@ -94,23 +133,73 @@ const Section2 = ({ formData, onFieldChange }) => {
           <TextField
             fullWidth
             label="Image URL"
+            style={{ paddingBottom: "15px" }}
+            name={`sections[${index}].img`}
             value={item.img || ""}
-            onChange={(e) =>
-              onFieldChange(`sections[${index}].img`, e.target.value)
-            }
+            onChange={(e) => onFieldChange(e.target.name, e.target.value)}
             variant="outlined"
-            sx={{ marginBottom: 2 }}
-          />
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) =>
+                      handleFileChange(e, `sections[${index}].img`)
+                    }
+                    style={{ display: "none" }}
+                    id={`sections[${index}].img`}
+                  />
 
+                  <label htmlFor={`sections[${index}].img`}>
+                    <IconButton component="span" disabled={uploading}>
+                      {uploading ? (
+                        <CircularProgress size={24} sx={{ color: "#d30c0b" }} />
+                      ) : (
+                        <CameraAltIcon
+                          sx={{ color: "#d30c0b", fontSize: "30px" }}
+                        />
+                      )}
+                    </IconButton>
+                  </label>
+                </InputAdornment>
+              ),
+            }}
+          />
           <TextField
             fullWidth
-            label="PDF LINK"
+            label="Upload PDF"
             value={item.link || ""}
             onChange={(e) =>
               onFieldChange(`sections[${index}].link`, e.target.value)
             }
             variant="outlined"
-            sx={{ marginBottom: 2 }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) =>
+                      handleFileChange(e, `sections[${index}].link`)
+                    }
+                    style={{ display: "none" }}
+                    id={`sections[${index}].link`}
+                  />
+                  <label htmlFor={`sections[${index}].link`}>
+                    <IconButton component="span" disabled={uploading}>
+                      {uploading ? (
+                        <CircularProgress size={24} sx={{ color: "#d30c0b" }} />
+                      ) : (
+                        <PictureAsPdfIcon
+                          sx={{ color: "#d30c0b", fontSize: "30px" }}
+                        />
+                      )}
+                    </IconButton>
+                  </label>
+                </InputAdornment>
+              ),
+            }}
           />
 
           <Button
