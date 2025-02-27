@@ -1,7 +1,7 @@
-"use client";
+import { useState } from "react";
+import { Grid, TextField, Typography } from "@mui/material";
 
-import React from "react";
-import { Grid, TextField, Typography, Button, Box } from "@mui/material";
+import "react-toastify/dist/ReactToastify.css";
 
 const KeyStakeholderSlider = ({ formData, onFieldChange, slug }) => {
   return (
@@ -44,23 +44,6 @@ const KeyStakeholderSlider = ({ formData, onFieldChange, slug }) => {
                 onFieldChange(
                   `components[${index}]`,
                   "description",
-                  e.target.value
-                )
-              }
-              variant="outlined"
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label={`Image URL ${index + 1}`}
-              name={`components[${index}].imageUrl`}
-              value={component.imageUrl}
-              onChange={(e) =>
-                onFieldChange(
-                  `components[${index}]`,
-                  "imageUrl",
                   e.target.value
                 )
               }
