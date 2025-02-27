@@ -13,27 +13,33 @@ import "react-toastify/dist/ReactToastify.css";
 import { uploadToS3 } from "@/lib/uploadToS3 ";
 
 const SecondSwiper = ({ formData, onFieldChange }) => {
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState([]);
 
-  const handleFileChange = (e, fieldName) => {
+  const updateUploading = (boolValue, index) => {
+    const newUploading = [...uploading];
+    newUploading[index] = boolValue;
+    setUploading(newUploading);
+  };
+
+  const handleFileChange = (e, fieldName, index) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    setUploading(true);
+    updateUploading(true, index);
 
     uploadToS3(
       file,
       (url) => {
         console.log("Uploaded URL:", url);
         onFieldChange(fieldName, url);
-        setUploading(false);
+        updateUploading(false, index);
         toast.success("Image uploaded successfully!", {
           position: "top-right",
         });
       },
       (error) => {
         console.error("Upload failed:", error);
-        setUploading(false);
+        updateUploading(false, index);
         toast.error("Image upload failed!", { position: "top-right" });
       }
     );
@@ -81,76 +87,85 @@ const SecondSwiper = ({ formData, onFieldChange }) => {
       />
 
       {formData.components.map((component, index) => (
-        <Grid container spacing={2} key={index} sx={{ padding: "10px" }}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label={`Title ${index + 1}`}
-              name={`components[${index}].title`}
-              value={component.title}
-              onChange={(e) =>
-                onFieldChange(`components[${index}]`, "title", e.target.value)
-              }
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label={`Description ${index + 1}`}
-              name={`components[${index}].description`}
-              value={component.description}
-              onChange={(e) =>
-                onFieldChange(
-                  `components[${index}]`,
-                  "description",
-                  e.target.value
-                )
-              }
-              variant="outlined"
-            />
-          </Grid>
+        <div key={index}>
+          <Typography variant="h6" gutterBottom>
+            {`Element ${index + 1}`}
+          </Typography>
+          <Grid container spacing={2} key={index} sx={{ padding: "10px" }}>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label={`Title ${index + 1}`}
+                name={`components[${index}].title`}
+                value={component.title}
+                onChange={(e) =>
+                  onFieldChange(`components[${index}]`, "title", e.target.value)
+                }
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label={`Description ${index + 1}`}
+                name={`components[${index}].description`}
+                value={component.description}
+                onChange={(e) =>
+                  onFieldChange(
+                    `components[${index}]`,
+                    "description",
+                    e.target.value
+                  )
+                }
+                variant="outlined"
+              />
+            </Grid>
 
-          <Grid item xs={5}>
-            <TextField
-              fullWidth
-              label={`Image URL ${index + 1}`}
-              name={`components[${index}].imageUrl`}
-              value={component.imageUrl}
-              onChange={(e) => onFieldChange(e.target.name, e.target.value)}
-              variant="outlined"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) =>
-                        handleFileChange(e, `components[${index}].imageUrl`)
-                      }
-                      style={{ display: "none" }}
-                      id={`uploadStakeHolders[${index}].imageUrl`}
-                    />
-                    <label htmlFor={`uploadStakeHolders[${index}].imageUrl`}>
-                      <IconButton component="span" disabled={uploading}>
-                        {uploading ? (
-                          <CircularProgress
-                            size={24}
-                            sx={{ color: "#d30c0b" }}
-                          />
-                        ) : (
-                          <CameraAltIcon
-                            sx={{ color: "#d30c0b", fontSize: "30px" }}
-                          />
-                        )}
-                      </IconButton>
-                    </label>
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                label={`Image URL ${index + 1}`}
+                name={`components[${index}].imageUrl`}
+                value={component.imageUrl}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
+                variant="outlined"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          handleFileChange(
+                            e,
+                            `components[${index}].imageUrl`,
+                            index
+                          )
+                        }
+                        style={{ display: "none" }}
+                        id={`uploadStakeHolders[${index}].imageUrl`}
+                      />
+                      <label htmlFor={`uploadStakeHolders[${index}].imageUrl`}>
+                        <IconButton component="span" disabled={uploading}>
+                          {index < uploading.length && uploading[index] ? (
+                            <CircularProgress
+                              size={24}
+                              sx={{ color: "#d30c0b" }}
+                            />
+                          ) : (
+                            <CameraAltIcon
+                              sx={{ color: "#d30c0b", fontSize: "30px" }}
+                            />
+                          )}
+                        </IconButton>
+                      </label>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
       ))}
     </>
   );

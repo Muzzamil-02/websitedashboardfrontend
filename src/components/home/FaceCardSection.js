@@ -6,38 +6,40 @@ import {
   InputAdornment,
   IconButton,
   CircularProgress,
-  Box,
 } from "@mui/material";
-
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { uploadToS3 } from "@/lib/uploadToS3 ";
 
 const FaceCardSection = ({ formData, onFieldChange, slug }) => {
-  if (!formData || Object.keys(formData).length === 0 || !formData.list?.length)
-    return null;
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState([]);
 
-  const handleFileChange = (e, fieldName) => {
+  const updateUploading = (boolValue, index) => {
+    const newUploading = [...uploading];
+    newUploading[index] = boolValue;
+    setUploading(newUploading);
+  };
+
+  const handleFileChange = (e, fieldName, index) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    setUploading(true);
+    updateUploading(true, index);
 
     uploadToS3(
       file,
       (url) => {
         console.log("Uploaded URL:", url);
-        onFieldChange(fieldName, url); // Pass the dynamic field name
-        setUploading(false);
+        onFieldChange(fieldName, url);
+        updateUploading(false, index);
         toast.success("Image uploaded successfully!", {
           position: "top-right",
         });
       },
       (error) => {
         console.error("Upload failed:", error);
-        setUploading(false);
+        updateUploading(false, index);
         toast.error("Image upload failed!", { position: "top-right" });
       }
     );
@@ -54,7 +56,7 @@ const FaceCardSection = ({ formData, onFieldChange, slug }) => {
         {formData.list?.map((member, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <div className="bg-white shadow-lg rounded-2xl p-4 text-center">
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
                   // label="Image URL"
@@ -69,7 +71,11 @@ const FaceCardSection = ({ formData, onFieldChange, slug }) => {
                           type="file"
                           accept="image/*"
                           onChange={(e) =>
-                            handleFileChange(e, `list[${index}].imageUrl`)
+                            handleFileChange(
+                              e,
+                              `list[${index}].imageUrl`,
+                              index
+                            )
                           }
                           style={{ display: "none" }}
                           id={`list[${index}].imageUrl`}
@@ -77,7 +83,7 @@ const FaceCardSection = ({ formData, onFieldChange, slug }) => {
 
                         <label htmlFor={`list[${index}].imageUrl`}>
                           <IconButton component="span" disabled={uploading}>
-                            {uploading ? (
+                            {index < uploading.length && uploading[index] ? (
                               <CircularProgress
                                 size={24}
                                 sx={{ color: "#d30c0b" }}

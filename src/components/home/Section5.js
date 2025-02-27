@@ -14,27 +14,64 @@ import "react-toastify/dist/ReactToastify.css";
 import { uploadToS3 } from "@/lib/uploadToS3 ";
 
 const Section5 = ({ formData, onFieldChange }) => {
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState([]);
+  const [uploading2, setUploading2] = useState([]);
 
-  const handleFileChange = (e, fieldName) => {
+  const updateUploading = (boolValue, index) => {
+    const newUploading = [...uploading];
+    newUploading[index] = boolValue;
+    setUploading(newUploading);
+  };
+
+  const updateUploading2 = (boolValue, index) => {
+    const newUploading = [...uploading2];
+    newUploading[index] = boolValue;
+    setUploading2(newUploading);
+  };
+
+  const handleFileChange = (e, fieldName, index) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    setUploading(true);
+    updateUploading(true, index);
 
     uploadToS3(
       file,
       (url) => {
         console.log("Uploaded URL:", url);
-        onFieldChange(fieldName, url); // Pass the dynamic field name
-        setUploading(false);
+        onFieldChange(fieldName, url);
+        updateUploading(false, index);
         toast.success("Image uploaded successfully!", {
           position: "top-right",
         });
       },
       (error) => {
         console.error("Upload failed:", error);
-        setUploading(false);
+        updateUploading(false, index);
+        toast.error("Image upload failed!", { position: "top-right" });
+      }
+    );
+  };
+
+  const handleFileChange2 = (e, fieldName, index) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    updateUploading2(true, index);
+
+    uploadToS3(
+      file,
+      (url) => {
+        console.log("Uploaded URL:", url);
+        onFieldChange(fieldName, url);
+        updateUploading2(false, index);
+        toast.success("Image uploaded successfully!", {
+          position: "top-right",
+        });
+      },
+      (error) => {
+        console.error("Upload failed:", error);
+        updateUploading2(false, index);
         toast.error("Image upload failed!", { position: "top-right" });
       }
     );
@@ -76,7 +113,7 @@ const Section5 = ({ formData, onFieldChange }) => {
 
         {/* Dynamically Render Right Section Items */}
         {Object.keys(formData.right).map(
-          (key) =>
+          (key, index) =>
             key !== "button" && (
               <Grid item xs={4} key={key}>
                 <TextField
@@ -93,15 +130,18 @@ const Section5 = ({ formData, onFieldChange }) => {
                           type="file"
                           accept="image/*"
                           onChange={(e) =>
-                            handleFileChange(e, `right.${key}.imgURL`)
+                            handleFileChange(e, `right.${key}.imgURL`, index)
                           }
                           style={{ display: "none" }}
                           id={`right.${key}.imgURL`}
                         />
 
                         <label htmlFor={`right.${key}.imgURL`}>
-                          <IconButton component="span" disabled={uploading}>
-                            {uploading ? (
+                          <IconButton
+                            component="span"
+                            disabled={uploading[index] ?? false}
+                          >
+                            {index < uploading.length && uploading[index] ? (
                               <CircularProgress
                                 size={24}
                                 sx={{ color: "#d30c0b" }}
@@ -138,7 +178,7 @@ const Section5 = ({ formData, onFieldChange }) => {
 
         {/* Dynamically Render Left Section Items */}
         {Object.keys(formData.left).map(
-          (key) =>
+          (key, index) =>
             key !== "button" && (
               <Grid item xs={4} key={key}>
                 <TextField
@@ -155,15 +195,18 @@ const Section5 = ({ formData, onFieldChange }) => {
                           type="file"
                           accept="image/*"
                           onChange={(e) =>
-                            handleFileChange(e, `left.${key}.imgURL`)
+                            handleFileChange2(e, `left.${key}.imgURL`, index)
                           }
                           style={{ display: "none" }}
                           id={`left.${key}.imgURL`}
                         />
 
                         <label htmlFor={`left.${key}.imgURL`}>
-                          <IconButton component="span" disabled={uploading}>
-                            {uploading ? (
+                          <IconButton
+                            component="span"
+                            disabled={uploading[index] ?? false}
+                          >
+                            {index < uploading2.length && uploading2[index] ? (
                               <CircularProgress
                                 size={24}
                                 sx={{ color: "#d30c0b" }}
