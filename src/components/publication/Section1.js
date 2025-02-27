@@ -11,7 +11,7 @@ import {
   Box,
 } from "@mui/material";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { uploadToS3 } from "@/lib/uploadToS3 ";
 
