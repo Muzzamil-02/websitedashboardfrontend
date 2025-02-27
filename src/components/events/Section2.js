@@ -15,6 +15,7 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { uploadToS3 } from "@/lib/uploadToS3 ";
+import SlowMotionVideoIcon from "@mui/icons-material/SlowMotionVideo";
 
 const Section2 = ({ formData, onFieldChange }) => {
   const handleAddArticle = () => {
@@ -131,16 +132,41 @@ const Section2 = ({ formData, onFieldChange }) => {
 
                 <TextField
                   fullWidth
-                  label="Video Link"
+                  label="Image URL"
+                  name={`sections[${index}].videoLink`}
                   value={event.videoLink}
-                  onChange={(e) =>
-                    onFieldChange(
-                      `sections[${index}].videoLink`,
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                   variant="outlined"
-                  sx={{ marginBottom: 2 }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <input
+                          type="file"
+                          accept="image/*,video/*"
+                          onChange={(e) =>
+                            handleFileChange(e, `sections[${index}].videoLink`)
+                          }
+                          style={{ display: "none" }}
+                          id={`sections[${index}].videoLink`}
+                        />
+
+                        <label htmlFor={`sections[${index}].videoLink`}>
+                          <IconButton component="span" disabled={uploading}>
+                            {uploading ? (
+                              <CircularProgress
+                                size={24}
+                                sx={{ color: "#d30c0b" }}
+                              />
+                            ) : (
+                              <SlowMotionVideoIcon
+                                sx={{ color: "#d30c0b", fontSize: "30px" }}
+                              />
+                            )}
+                          </IconButton>
+                        </label>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
 
                 <Button
