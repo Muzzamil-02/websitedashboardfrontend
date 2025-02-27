@@ -1,8 +1,43 @@
-"use client";
+import { useState } from "react";
+import {
+  Grid,
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton,
+  CircularProgress,
+} from "@mui/material";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { uploadToS3 } from "@/lib/uploadToS3 ";
 
-import { Grid, TextField, Typography } from "@mui/material";
+const Section5 = ({ formData, onFieldChange }) => {
+  const [uploading, setUploading] = useState(false);
 
-const Section5 = ({ formData, onFieldChange, slug }) => {
+  const handleFileChange = (e, fieldName) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+
+    uploadToS3(
+      file,
+      (url) => {
+        console.log("Uploaded URL:", url);
+        onFieldChange(fieldName, url);
+        setUploading(false);
+        toast.success("Image uploaded successfully!", {
+          position: "top-right",
+        });
+      },
+      (error) => {
+        console.error("Upload failed:", error);
+        setUploading(false);
+        toast.error("Image upload failed!", { position: "top-right" });
+      }
+    );
+  };
   return (
     <>
       <Typography variant="h5" gutterBottom>
@@ -82,20 +117,44 @@ const Section5 = ({ formData, onFieldChange, slug }) => {
                 </Grid>
               </Grid>
             ))}
+
             <Grid item xs={12}>
               <TextField
                 fullWidth
                 label="Image URL"
                 name={`component[${index}].imageURL`}
-                value={item.imageURL}
-                onChange={(e) =>
-                  onFieldChange(
-                    `component[${index}]`,
-                    "imageURL",
-                    e.target.value
-                  )
-                }
+                value={item?.imageURL || ""}
+                onChange={(e) => onFieldChange(e.target.name, e.target.value)}
                 variant="outlined"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          handleFileChange(e, `component[${index}].imageURL`)
+                        }
+                        style={{ display: "none" }}
+                        id={`uploading[${index}].imageURL`}
+                      />
+                      <label htmlFor={`uploading[${index}].imageURL`}>
+                        <IconButton component="span" disabled={uploading}>
+                          {uploading ? (
+                            <CircularProgress
+                              size={24}
+                              sx={{ color: "#d30c0b" }}
+                            />
+                          ) : (
+                            <CameraAltIcon
+                              sx={{ color: "#d30c0b", fontSize: "30px" }}
+                            />
+                          )}
+                        </IconButton>
+                      </label>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
           </Grid>
