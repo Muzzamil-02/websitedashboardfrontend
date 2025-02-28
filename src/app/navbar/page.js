@@ -30,7 +30,6 @@ export default function page() {
   const [languages] = useState([
     { label: "English", code: "en" },
     { label: "Finnish", code: "fn" },
-    { label: "Arabic", code: "ar" },
   ]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [initialValues, setInitialValues] = useState({});

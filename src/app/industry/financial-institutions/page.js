@@ -55,7 +55,6 @@ export default function Home() {
   const [languages] = useState([
     { label: "English", code: "en" },
     { label: "Finnish", code: "fn" },
-    { label: "Arabic", code: "ar" },
   ]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [initialValues, setInitialValues] = useState({});
@@ -82,12 +81,13 @@ export default function Home() {
   const handleSaveChanges = (values) => {
     const formattedData = JsonToSLugFormatter(values);
     homeEditData(formattedData, selectedLanguage, "financial")
-     .then(() => {
-            toast.success("Data updated Successfully");
-          })
-          .catch(() => {
-            toast.error("Failed to save data.");
-          });sss;
+      .then(() => {
+        toast.success("Data updated Successfully");
+      })
+      .catch(() => {
+        toast.error("Failed to save data.");
+      });
+    sss;
   };
 
   return (
