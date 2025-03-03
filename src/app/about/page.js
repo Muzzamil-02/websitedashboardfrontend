@@ -21,6 +21,7 @@ import section2 from "@/components/about/Section2";
 import section3 from "@/components/about/Section3";
 import section4 from "@/components/about/Section4";
 import section5 from "@/components/about/Section5";
+import TeamSection from "@/components/about/Section6";
 
 import { homeEditData, homeGetData } from "@/services/about/service.js";
 import { JsonFormatter, JsonToSLugFormatter } from "@/lib/helpers/helper";
@@ -32,6 +33,7 @@ const sectionComponents = {
   section3,
   section4,
   section5,
+  TeamSection,
 };
 
 export default function About() {
