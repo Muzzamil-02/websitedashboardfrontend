@@ -85,10 +85,10 @@ const Section6 = ({ formData, onFieldChange }) => {
                         handleFileChange(e, `component.${index}.imageURL`)
                       }
                       style={{ display: "none" }}
-                      id={`component.${index}.imageURL`}
+                      id={`members[${index}].image`}
                     />
 
-                    <label htmlFor={`component.${index}.imageURL`}>
+                    <label htmlFor={`members[${index}].image`}>
                       <IconButton component="span" disabled={uploading}>
                         {uploading ? (
                           <CircularProgress
