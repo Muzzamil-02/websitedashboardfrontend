@@ -1,19 +1,34 @@
-// src/app/api/languages/route.js
 import dbConnect from "@/lib/dbConnect";
 import Language from "@/models/Language";
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
+}
 
 export async function GET(request, { params }) {
   await dbConnect();
 
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  };
+
   try {
-    const { lang } = await params;
+    const { lang } = params;
 
     if (!lang) {
       return new Response(
         JSON.stringify({ message: "Language code is required" }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" },
+          headers,
         }
       );
     }
@@ -25,19 +40,19 @@ export async function GET(request, { params }) {
     if (!language) {
       return new Response(JSON.stringify({ message: "Language not found" }), {
         status: 404,
-        headers: { "Content-Type": "application/json" },
+        headers,
       });
     }
 
     return new Response(JSON.stringify(language), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers,
     });
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ message: "Server error" }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers,
     });
   }
 }
